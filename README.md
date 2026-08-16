@@ -291,6 +291,104 @@ whoever created the page in 2019.
 
 Which is the finding.
 
+## Second corpus: measuring commitment in its strict form
+
+The GOV.UK study could not measure the framework's central dimension. Nothing
+in that estate expresses who maintains a document or when anyone last checked
+it, so commitment coverage collapsed to a weak organisation-level proxy and the
+claim that last-modified flatters a corpus stayed an argument rather than a
+measurement.
+
+Docs-as-code estates are the exception, and they close both gaps. Two were
+scanned on 16 August 2026:
+
+| | GOV.UK guidance | kubernetes/website | dotnet/docs |
+|---|---|---|---|
+| Documents | 54,222 | 1,672 | 13,412 |
+| Declared verification date | **0%** | 0% | **98.9%** |
+| Named owner | 0% | 14.0% | 9.8% |
+| Strict commitment (both) | **0%** | 0% | **9.8%** |
+
+Kubernetes names people but never dates a check. Microsoft dates almost every
+check but rarely names anyone. Neither achieves both on most of its corpus, and
+the two estates fail in opposite directions.
+
+Kubernetes ownership is also thinner than it looks. Only two `OWNERS` files
+cover the entire English documentation tree, so directory-level inheritance is
+near useless; the 14.0% figure comes almost entirely from a per-document
+`reviewers` list in front matter, present on 231 of 1,672 files.
+
+### The flattery effect, finally quantified
+
+Microsoft Learn's house style defines `ms.date` as the date the article was
+last reviewed for accuracy, which is a declared verification date. Git records
+independently when the file actually changed. On 13,267 documents carrying
+both, they diverge sharply:
+
+| | Median age | Stale over 2 years |
+|---|---|---|
+| By declared verification (`ms.date`) | **9.38 years** | **87.8%** |
+| By git modification | 1.94 years | 49.6% |
+
+**5,077 documents, 38.3% of the corpus, look current by modification and are
+stale by their publisher's own verification date.** They were changed within
+the last two years, so any freshness dashboard built on last-modified counts
+them as fresh. The publisher's own metadata says nobody has checked them for
+accuracy in over two years.
+
+98.7% of documents were changed after their last declared verification, 84.5%
+of them by more than a year. Only 3.1% were verified and changed on the same
+day, which is what a maintained declaration would look like.
+
+### The obvious objection, tested
+
+Most of those old declarations sit in documentation for closed technologies:
+WCF, .NET Framework, Visual Basic reference. Reporting a stale date on content
+that is deliberately frozen would be a cheap shot, so the corpus was split and
+both halves reported.
+
+| Segment | Documents | Median declared | Median git | Understatement gap |
+|---|---|---|---|---|
+| Legacy (framework, VB, unmanaged API) | 9,030 | 9.38y | 5.05y | 37.4 points |
+| Actively developed | 4,237 | 3.93y | 0.49y | **40.0 points** |
+
+The effect is **larger** in the actively developed half. Those documents were
+touched a median of six months ago and last declared verified nearly four years
+ago. 40.0% of them look current and are not.
+
+So the claim survives its strongest counter-argument: measuring freshness by
+modification understates staleness by roughly 40 percentage points, and this
+has nothing to do with abandoned content.
+
+### What this says about the framework
+
+Frozen content is a legitimate state. Documentation for a closed technology
+does not need re-verifying every quarter, and demanding it would be theatre.
+
+The defect is that the corpus has no way to say so. A document last verified in
+2017 because the technology is closed, a document last verified in 2017 because
+nobody has looked at it, and a document last verified in 2017 because the
+declaration was stamped once and abandoned are indistinguishable in the data.
+All three present as one stale date.
+
+This is exactly what EKO's review cadence and scope statement are for. A
+deliberately frozen asset is one with a long or open-ended declared cadence and
+a scope statement saying why, which is a different and inspectable state from
+a breached commitment. Without those two fields, a publisher that is doing the
+right thing cannot prove it.
+
+Reproduce:
+
+```bash
+git clone --filter=blob:none --no-checkout https://github.com/dotnet/docs /tmp/dac/dotnet-docs
+cd /tmp/dac/dotnet-docs && git sparse-checkout set docs && git checkout main && cd -
+python3 pipeline/harvest_docs_as_code.py --repo /tmp/dac/dotnet-docs --content docs \
+    --flavour microsoft --out data/raw/dotnet_docs.jsonl
+python3 pipeline/verification_vs_modification.py --input data/raw/dotnet_docs.jsonl \
+    --corpus-name "dotnet/docs" --out reports/verification_vs_modification_dotnet.json \
+    --legacy-prefix docs/framework/ docs/visual-basic/misc docs/csharp/misc docs/core/unmanaged-api
+```
+
 ## Prior art, and what this adds
 
 Two bodies of work sit next to this one. Both deserve credit, and neither

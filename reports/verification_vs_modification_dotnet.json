@@ -1,0 +1,270 @@
+{
+  "corpus": "dotnet/docs (Microsoft Learn)",
+  "source_file": "dotnet_docs.jsonl",
+  "as_of": "2026-08-16",
+  "documents": 13412,
+  "documents_with_both_dates": 13267,
+  "coverage": {
+    "declared_verification_date": 98.92,
+    "named_owner": 9.83,
+    "strict_commitment_both": 9.83
+  },
+  "age_by_declared_verification": {
+    "median_years": 9.38,
+    "mean_years": 7.9,
+    "buckets": {
+      "under_1y": 1215,
+      "2_to_5y": 1363,
+      "1_to_2y": 400,
+      "over_5y": 10289
+    },
+    "stale_over_2y": 11652,
+    "stale_over_2y_percent": 87.83,
+    "stale_over_5y": 10289
+  },
+  "age_by_git_modification": {
+    "median_years": 1.94,
+    "mean_years": 2.82,
+    "buckets": {
+      "under_1y": 5669,
+      "1_to_2y": 1023,
+      "2_to_5y": 1708,
+      "over_5y": 4867
+    },
+    "stale_over_2y": 6575,
+    "stale_over_2y_percent": 49.56,
+    "stale_over_5y": 4867
+  },
+  "divergence": {
+    "median_lag_days": 1892,
+    "mean_lag_days": 1855.7,
+    "modified_after_declared_verification": 13094,
+    "modified_after_declared_verification_percent": 98.7,
+    "lag_over_1_year": 11206,
+    "lag_over_1_year_percent": 84.47,
+    "lag_over_2_years": 10795,
+    "declared_date_after_last_commit": 0,
+    "declared_date_in_the_future": 0,
+    "declared_and_modified_same_day": 412,
+    "declared_and_modified_same_day_percent": 3.11
+  },
+  "the_flattery_effect": {
+    "documents_current_by_modification_but_stale_by_declared_verification": 5077,
+    "percent_of_paired": 38.27,
+    "note": "These documents were changed within the last two years, so any freshness measure based on modification counts them as current. Their publisher's own declared verification date says nobody has checked them for accuracy in over two years."
+  },
+  "worst_lag_examples": [
+    {
+      "path": "docs/standard/design-guidelines/parameter-design.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/guidelines-for-collections.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/equality-operators.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/serialization.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/extension-methods.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/usage-guidelines.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/struct.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/base-classes-for-implementing-abstractions.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/exceptions-and-performance.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/dispose-pattern.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/operator-overloads.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/property.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/attributes.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/abstractions-abstract-types-and-interfaces.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    },
+    {
+      "path": "docs/standard/design-guidelines/event.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "lag_days": 6367
+    }
+  ],
+  "oldest_declared_examples": [
+    {
+      "path": "docs/framework/additional-apis/xpsdocumentwriter-raise-writingcancelled-method-system-windows-xps.md",
+      "declared_verified": "2007-12-12",
+      "last_commit": "2020-06-18",
+      "declared_age_years": 18.68
+    },
+    {
+      "path": "docs/framework/additional-apis/xpsdocumentwriter-raise-writingprogresschanged-method-system-windows-xps.md",
+      "declared_verified": "2007-12-12",
+      "last_commit": "2020-06-18",
+      "declared_age_years": 18.68
+    },
+    {
+      "path": "docs/framework/additional-apis/xpsdocumentwriter-raise-writingprintticketrequired-method-system-windows-xps.md",
+      "declared_verified": "2007-12-12",
+      "last_commit": "2020-06-18",
+      "declared_age_years": 18.68
+    },
+    {
+      "path": "docs/framework/additional-apis/xpsdocumentwriter-raise-writingcompleted-method-system-windows-xps.md",
+      "declared_verified": "2007-12-12",
+      "last_commit": "2020-06-18",
+      "declared_age_years": 18.68
+    },
+    {
+      "path": "docs/standard/design-guidelines/sealing.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2023-10-02",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/exceptions.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2021-02-05",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/general-naming-conventions.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2023-10-02",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/parameter-design.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/names-of-namespaces.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2025-05-28",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/using-standard-exception-types.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2023-10-02",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/guidelines-for-collections.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/equality-operators.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/serialization.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/extension-methods.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2026-03-29",
+      "declared_age_years": 17.82
+    },
+    {
+      "path": "docs/standard/design-guidelines/capitalization-conventions.md",
+      "declared_verified": "2008-10-22",
+      "last_commit": "2023-10-02",
+      "declared_age_years": 17.82
+    }
+  ],
+  "segments": {
+    "legacy": {
+      "documents": 9030,
+      "median_declared_age_years": 9.38,
+      "median_git_age_years": 5.05,
+      "stale_over_2y_declared_percent": 98.27,
+      "stale_over_2y_modification_percent": 60.82,
+      "look_current_but_are_not": 3382,
+      "look_current_but_are_not_percent": 37.45,
+      "understatement_gap_percentage_points": 37.4
+    },
+    "active": {
+      "documents": 4237,
+      "median_declared_age_years": 3.93,
+      "median_git_age_years": 0.49,
+      "stale_over_2y_declared_percent": 65.57,
+      "stale_over_2y_modification_percent": 25.56,
+      "look_current_but_are_not": 1695,
+      "look_current_but_are_not_percent": 40.0,
+      "understatement_gap_percentage_points": 40.0
+    }
+  },
+  "legacy_prefixes": [
+    "docs/framework/",
+    "docs/visual-basic/misc",
+    "docs/visual-basic/language-reference",
+    "docs/visual-basic/programming-guide",
+    "docs/csharp/misc",
+    "docs/core/unmanaged-api"
+  ]
+}

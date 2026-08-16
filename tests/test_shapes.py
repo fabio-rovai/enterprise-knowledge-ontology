@@ -253,3 +253,69 @@ def test_committed_cri_report_is_consistent():
     assert d2["unchanged_over_5y"] >= d2["unchanged_over_10y"]
     assert d2["unchanged_over_2y"] >= d2["unchanged_over_5y"]
     assert 0 <= r["CRI"] <= 100
+
+
+# --------------------------------------------------------------------------
+# Docs-as-code harvester
+# --------------------------------------------------------------------------
+
+import harvest_docs_as_code as dac  # noqa: E402
+
+
+def test_front_matter_reads_block_sequences():
+    """Ownership is routinely a YAML list; dropping list items would zero out
+    the very field the strict commitment measure depends on."""
+    text = "---\ntitle: Thing\nreviewers:\n- alice\n- bob\nms.date: 04/30/2026\n---\nBody here."
+    meta, body = dac.parse_front_matter(text)
+    assert meta["reviewers"] == ["alice", "bob"]
+    assert meta["title"] == "Thing"
+    assert body.strip() == "Body here."
+
+
+def test_front_matter_absent_returns_whole_text():
+    meta, body = dac.parse_front_matter("no front matter here")
+    assert meta == {}
+    assert body == "no front matter here"
+
+
+def test_declared_date_reads_us_format():
+    """ms.date is written month/day/year; reading it as day/month silently
+    shifts most of the corpus and would corrupt every freshness figure."""
+    assert dac.parse_declared_date("04/30/2026") == "2026-04-30"
+    assert dac.parse_declared_date('"09/30/2020"') == "2020-09-30"
+
+
+def test_declared_date_reads_iso_format():
+    assert dac.parse_declared_date("2026-04-30") == "2026-04-30"
+
+
+def test_declared_date_rejects_rubbish():
+    assert dac.parse_declared_date("") is None
+    assert dac.parse_declared_date("soon") is None
+    assert dac.parse_declared_date("13/45/2026") is None
+
+
+def test_as_scalar_normalises_lists():
+    assert dac.as_scalar(["a", "b"]) == "a"
+    assert dac.as_scalar("x") == "x"
+    assert dac.as_scalar(None) == ""
+    assert dac.as_scalar([]) == ""
+
+
+def test_committed_divergence_report_is_consistent():
+    path = ROOT / "reports" / "verification_vs_modification_dotnet.json"
+    if not path.exists():
+        pytest.skip("no committed divergence report")
+    r = json.loads(path.read_text())
+    paired = r["documents_with_both_dates"]
+    assert paired <= r["documents"]
+    dv = r["age_by_declared_verification"]
+    gm = r["age_by_git_modification"]
+    assert sum(dv["buckets"].values()) == paired
+    assert sum(gm["buckets"].values()) == paired
+    # The whole point: declared verification must be the harsher measure.
+    assert dv["stale_over_2y"] >= gm["stale_over_2y"]
+    assert dv["median_years"] >= gm["median_years"]
+    seg = r.get("segments", {})
+    if "active" in seg:
+        assert seg["active"]["understatement_gap_percentage_points"] > 0
