@@ -1,0 +1,27 @@
+{
+  "upload_type": "software",
+  "title": "Enterprise Knowledge Ontology (EKO) and the Corpus Readiness Index",
+  "description": "An open vocabulary, a machine-checkable publish gate, and a measurement instrument for organisational knowledge in the age of retrieval. EKO formalises the distinction between a working document and an authoritative knowledge asset as a maintenance commitment with its own lifecycle, enforced by a SHACL publish gate runnable in CI, and the Corpus Readiness Index scores a corpus across seven dimensions by geometric mean. The repository includes a real study of 54,222 GOV.UK guidance documents in which zero of 300 sampled documents carried any machine-readable maintenance-commitment field. Ontology, shapes and vocabularies are CC BY 4.0; code is MIT.",
+  "creators": [
+    {
+      "name": "Rovai, Fabio",
+      "affiliation": "The Tesseract Academy (Kampakis and Co Ltd)"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+    "ontology",
+    "SHACL",
+    "knowledge management",
+    "enterprise knowledge",
+    "corpus readiness",
+    "register assurance",
+    "identifier governance"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/fabio-rovai/enterprise-knowledge-ontology"
+    }
+  ]
+}
