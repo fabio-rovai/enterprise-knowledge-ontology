@@ -291,6 +291,53 @@ whoever created the page in 2019.
 
 Which is the finding.
 
+## Prior art, and what this adds
+
+Two bodies of work sit next to this one. Both deserve credit, and neither
+does what this repository does.
+
+**ISO 30401:2018, Knowledge management systems: Requirements** is the formal
+standard in the field. It carries Amendment 1 (2022) and Amendment 2 (2024,
+climate action changes), and is currently being revised as ISO/DIS 30401,
+which is at the enquiry stage with ISO members.
+
+It is a management-system standard built on the usual harmonised structure:
+context, leadership, planning, support, operation, performance evaluation,
+improvement. It specifies what your *management system* must do
+organisationally, and it deliberately does not prescribe how to manage
+knowledge, leaving implementation to each organisation.
+
+That is a reasonable design choice for a management-system standard, and it
+means ISO 30401 says nothing testable about a corpus. There is no clause that
+defines when content stops being a draft and becomes authoritative, no required
+review cadence, no freshness property, and no definition of what makes a
+document fit to be served as a grounded answer. You can hold the certificate
+and have a corpus that fails every dimension measured here.
+
+**K-AI**, a French document knowledge platform based in Versailles, published
+[a piece on 25 May 2026](https://www.k-ai.ai/en/news/ai-readiness-assessment-2026-corpus-pillar/)
+arguing that the major AI readiness frameworks all omit unstructured documents,
+and proposing a "Corpus Readiness" pillar with six axes: in-document anomalies,
+cross-document conflicts, divergent duplicates, unmarked obsolescence,
+traceability in the sense of Article 12 of the EU AI Act, and freshness by
+segment.
+
+They are right, they got there first, and the overlap with the dimensions below
+is substantial and arrived at independently. Credit where it is due: **K-AI
+named the pillar.** What the article does not contain is a scoring method, any
+formulas, an implementation, or a measured study, and the axes are presented as
+the basis for a commercial audit rather than as something you could run
+yourself.
+
+So the contribution here is not the observation that corpus quality is a
+missing pillar. It is the part that turns the observation into something a
+buyer can check without hiring anyone: **a published specification, a runnable
+instrument, and a real study on 54,222 documents with every number
+regenerable from committed code.**
+
+If you know of an open, testable specification with an implementation that
+predates this, open an issue. I would rather be corrected than confident.
+
 ## What is deliberately not here
 
 - No claim that a high CRI means a good corpus. It means the corpus is
