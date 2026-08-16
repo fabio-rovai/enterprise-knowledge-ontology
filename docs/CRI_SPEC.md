@@ -49,7 +49,7 @@ score is better and so that the underlying counts, not just the score, are
 reported. **The counts matter more than the score.** A single number is useful
 for tracking a trend and useless for deciding what to do on Monday.
 
-### D1 — Commitment coverage
+### D1: Commitment coverage
 
 *Can a named party be held to this content?*
 
@@ -68,7 +68,7 @@ Sub-measures worth reporting separately:
 - documents carrying a machine-readable review cadence
 - documents carrying a machine-readable verification date
 
-### D2 — Freshness
+### D2: Freshness
 
 *Is the content within its own declared review cadence?*
 
@@ -81,7 +81,7 @@ touching the second, and content systems record only the first.
 Report the age distribution, not the mean. Knowledge estates have long tails
 and the tail is where the damage is.
 
-### D3 — Canonicity
+### D3: Canonicity
 
 *Is there one authoritative source per topic, or several?*
 
@@ -95,7 +95,7 @@ department publishing four live pages on the same subject is a maintenance
 problem, and it is the one that produces confidently wrong retrieval answers,
 because all four sources look equally legitimate to the ranker.
 
-### D4 — Decommission hygiene
+### D4: Decommission hygiene
 
 *Is content the organisation has disowned actually gone?*
 
@@ -106,15 +106,15 @@ The critical subtlety, and the one that catches well-run estates: the curated
 search index and the crawlable surface are not the same corpus. A publisher can
 do withdrawal correctly in its own search product while continuing to serve the
 withdrawn content at its original address, in its sitemap, and through its
-content API. A retrieval pipeline built the obvious way — crawl the sitemap,
-fetch the content endpoint, chunk, embed — ingests everything the curated index
+content API. A retrieval pipeline built the obvious way, crawl the sitemap,
+fetch the content endpoint, chunk, embed, ingests everything the curated index
 was careful to exclude.
 
 So D4 must be measured **against the surface the retrieval pipeline actually
 consumes**, not against the surface the publisher curates. Measuring the wrong
 one produces a perfect score and a false sense of safety.
 
-### D5 — Redundancy
+### D5: Redundancy
 
 *How much of the corpus is the same thing again?*
 
@@ -128,7 +128,7 @@ identical copies are **distinguished by scope**: if six documents differ only
 in a year and none of them declares which year it governs in a machine-readable
 way, a retrieval system will pick one at random and present it as the answer.
 
-### D6 — Coherence
+### D6: Coherence
 
 *Do documents on the same topic contradict each other?*
 
@@ -144,7 +144,7 @@ correctly ignore all of them. A narrow, deterministic extractor that produces
 a hundred candidates a human can adjudicate in an afternoon is worth more than
 a broad one that produces thousands nobody will read.
 
-### D7 — Retrieval fitness
+### D7: Retrieval fitness
 
 *Is there anything here a retrieval system can actually use?*
 

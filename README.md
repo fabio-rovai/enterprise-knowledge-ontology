@@ -11,14 +11,14 @@ The market answers with adjectives. Content is "trusted", "curated", a "single
 source of truth", "AI-ready". None of these are testable. This repository makes
 them testable.
 
-- **[`ontology/`](ontology/)** — an OWL vocabulary that formalises the
+- **[`ontology/`](ontology/)**: an OWL vocabulary that formalises the
   distinction between a working document and an authoritative knowledge asset.
-- **[`shapes/`](shapes/)** — a SHACL publish gate that enforces it, runnable in
+- **[`shapes/`](shapes/)**: a SHACL publish gate that enforces it, runnable in
   CI in front of a knowledge repository the way a linter runs in front of code.
-- **[`pipeline/`](pipeline/)** — the Corpus Readiness Index scanner, plus the
+- **[`pipeline/`](pipeline/)**: the Corpus Readiness Index scanner, plus the
   harvesters and probes used to produce the study below.
-- **[`docs/CRI_SPEC.md`](docs/CRI_SPEC.md)** — the measurement specification.
-- **[`reports/`](reports/)** — real results from a real corpus.
+- **[`docs/CRI_SPEC.md`](docs/CRI_SPEC.md)**: the measurement specification.
+- **[`reports/`](reports/)**: real results from a real corpus.
 
 ## The idea the whole thing rests on
 
@@ -39,7 +39,7 @@ a well-written working document outranks a maintained stub every time.
 ## The study: what 54,222 real documents look like
 
 To find out whether any of this is measurable in practice, the scanner was run
-against the guidance corpus of GOV.UK — 54,222 documents from a total estate of
+against the guidance corpus of GOV.UK, 54,222 documents from a total estate of
 708,433, harvested through the public Search API on 16 August 2026 under the
 Open Government Licence.
 
@@ -60,7 +60,7 @@ point: findings here are a floor, not a ceiling.
 | D6 Coherence | 94.0 | **181** contradiction candidates across 56 topics |
 | D7 Retrieval fitness | 64.5 | **16,131 (29.7%)** have under 500 characters of indexable text |
 
-### Finding 1 — The metadata to express a maintenance commitment does not exist
+### Finding 1: The metadata to express a maintenance commitment does not exist
 
 300 documents were sampled at random and fetched in full through the GOV.UK
 Content API. Across every one of them, **133 distinct JSON keys** were observed
@@ -82,7 +82,7 @@ an owner who was never named.
 
 Reproduce: `python3 pipeline/probe_commitment_fields.py --sample 300`
 
-### Finding 2 — The corpus is much older than it looks
+### Finding 2: The corpus is much older than it looks
 
 Median time since last change is **3.69 years**. The distribution:
 
@@ -100,12 +100,12 @@ checking a single fact. The honest number is unobtainable, because as Finding 1
 shows, nobody records it.
 
 The vivid version comes from GOV.UK's own publishing-era metadata. **13,595
-live guidance documents are still tagged to the 2010–2015 coalition
-government** — more than the 7,946 tagged to the current administration. Twelve
-documents are attributed to the 1940–1945 Churchill national government and are
+live guidance documents are still tagged to the 2010 to 2015 coalition
+government**, more than the 7,946 tagged to the current administration. Twelve
+documents are attributed to the 1940 to 1945 Churchill national government and are
 still being served today.
 
-### Finding 3 — The curated index and the crawlable surface are different corpora
+### Finding 3: The curated index and the crawlable surface are different corpora
 
 This is the finding with the sharpest engineering consequence, and it is the
 one a competent team is most likely to miss.
@@ -124,7 +124,7 @@ A random sample of 500 URLs drawn from GOV.UK's own sitemap was fetched through
 the Content API:
 
 - the sitemap advertises **864,397 URLs**, against a search index of **708,433**
-- **32 of 499** successfully probed URLs were withdrawn — **6.41%**
+- **32 of 499** successfully probed URLs were withdrawn: **6.41%**
   (95% confidence interval 4.26% to 8.56%)
 - **25 of those 32** were still serving substantive body text
 - median time since withdrawal: **5.87 years**; oldest: **12.35 years**
@@ -137,15 +137,15 @@ One concrete case: `/guidance/nhs-test-and-trace-how-it-works` was withdrawn on
 returns **43,671 characters** of authoritative-looking guidance for it today.
 
 So the defect is not in the publisher's content governance, which is working.
-It is that a retrieval pipeline built the obvious way — crawl the sitemap,
-fetch the content endpoint, chunk, embed — ingests precisely the content the
+It is that a retrieval pipeline built the obvious way, crawl the sitemap,
+fetch the content endpoint, chunk, embed, ingests precisely the content the
 curated index was careful to exclude. Every organisation building RAG over its
 own estate is doing the equivalent, against a document store whose withdrawal
 discipline is considerably worse than this one.
 
 Reproduce: `python3 pipeline/probe_withdrawn.py --sample 500`
 
-### Finding 4 — Ownership decays quietly
+### Finding 4: Ownership decays quietly
 
 **4,810 documents (8.9%)** are owned only by organisations that are no longer
 live. A further **127** are owned by a body GOV.UK records as having ceased to
@@ -162,7 +162,7 @@ nobody. This is why EKO models the commitment as a first-class object with its
 own lifecycle rather than as an attribute of the document: **a commitment that
 lapses is invisible unless lapsing is a state something can be in.**
 
-### Finding 5 — Redundancy concentrates in annual series
+### Finding 5: Redundancy concentrates in annual series
 
 334 near-duplicate clusters covering 1,245 documents, detected by 64-bit
 simhash over three-word shingles at a Hamming distance of 3. The largest single
@@ -178,7 +178,7 @@ This is what the ontology's scope model is for, and it is the cheapest fix in
 the whole framework: one date-range field per document collapses a 109-way
 ambiguity into a single lookup.
 
-### Finding 6 — Contradiction is tractable if you keep the extractor narrow
+### Finding 6: Contradiction is tractable if you keep the extractor narrow
 
 181 contradiction candidates across 56 topics, from a deliberately narrow
 deterministic extractor that compares only monetary values and percentages
@@ -194,7 +194,7 @@ owner will correctly ignore all of them. A narrow extractor producing 181
 candidates a human can adjudicate in an afternoon is worth more than a broad
 one producing thousands nobody reads.
 
-### Finding 7 — A third of the corpus has nothing to retrieve
+### Finding 7: A third of the corpus has nothing to retrieve
 
 **16,131 documents (29.7%)** contain under 500 characters of indexable text.
 Median body length across the corpus is 2,012 characters. A further 4,086

@@ -47,8 +47,8 @@ check that the pagination did not silently truncate.
 Whole-estate total at time of harvest: **708,433** documents.
 
 Including `international_treaty` is what produces the 81-year maximum age. That
-is real rather than an artefact — historic treaties genuinely are live guidance
-pages — but anyone uncomfortable with it can rerun with `--types` restricted
+is real rather than an artefact, historic treaties genuinely are live guidance
+pages, but anyone uncomfortable with it can rerun with `--types` restricted
 and the headline numbers barely move, because treaties are 3.1% of the corpus.
 
 ## What is a sample rather than an enumeration
@@ -92,7 +92,7 @@ conservative.
 **D6 produces candidates, not contradictions.** The extractor compares only
 monetary values and percentages between documents sharing a normalised title.
 It cannot tell that two figures differ legitimately because they govern
-different years — indeed the Local Housing Allowance example almost certainly
+different years, indeed the Local Housing Allowance example almost certainly
 is legitimate variation across years, and is included precisely to show what a
 candidate looks like before adjudication. The number is a triage queue length,
 not a defect count.
