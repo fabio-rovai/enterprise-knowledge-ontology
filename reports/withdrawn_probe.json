@@ -1,0 +1,208 @@
+{
+  "scanned_at": "2026-08-16T16:30:13.099576+00:00",
+  "sitemap_urls_advertised": 864397,
+  "search_index_documents": 708433,
+  "withdrawn_documents_returned_by_search_index": 0,
+  "sampled": 500,
+  "successfully_probed": 499,
+  "fetch_errors": 1,
+  "withdrawn_documents_in_sample": 32,
+  "withdrawn_rate_percent": 6.41,
+  "withdrawn_still_serving_body_text": 25,
+  "total_body_characters_served_by_withdrawn_pages_in_sample": 50492,
+  "median_years_since_withdrawal": 5.87,
+  "oldest_withdrawal_years": 12.35,
+  "withdrawn_by_document_type": {
+    "notice": 14,
+    "html_publication": 5,
+    "press_release": 3,
+    "guidance": 3,
+    "case_study": 2,
+    "news_story": 2,
+    "decision": 1,
+    "detailed_guide": 1,
+    "statutory_guidance": 1
+  },
+  "examples": [
+    {
+      "path": "/government/publications/conflict-stabilisation-and-security-fund-gender-peace-and-security-calls-for-bids-2021-to-2022/support-for-womens-rights-organisations-in-conflict-affected-states-terms-of-reference",
+      "document_type": "html_publication",
+      "withdrawn": true,
+      "withdrawn_at": "2021-08-25T07:07:29Z",
+      "body_characters": 8665,
+      "public_updated_at": "2021-05-21T09:30:00+01:00",
+      "first_published_at": "2021-05-21T09:30:06+01:00"
+    },
+    {
+      "path": "/government/news/alert-for-charities-operating-in-syria-or-turkey-about-aid-passing-through-the-bab-al-hawa-crossing",
+      "document_type": "news_story",
+      "withdrawn": true,
+      "withdrawn_at": "2023-11-06T13:14:51Z",
+      "body_characters": 5399,
+      "public_updated_at": "2018-12-03T15:55:00+00:00",
+      "first_published_at": "2018-12-03T15:55:00+00:00"
+    },
+    {
+      "path": "/government/news/more-and-more-birmingham-drivers-change-their-address-online",
+      "document_type": "press_release",
+      "withdrawn": true,
+      "withdrawn_at": "2020-09-15T09:54:37Z",
+      "body_characters": 4190,
+      "public_updated_at": "2012-07-30T00:00:00+01:00",
+      "first_published_at": "2012-07-30T00:00:00+01:00"
+    },
+    {
+      "path": "/government/news/south-west-farmers-banned-from-owning-animals-following-two-successful-apha-prosecutions",
+      "document_type": "press_release",
+      "withdrawn": true,
+      "withdrawn_at": "2025-04-01T13:45:17Z",
+      "body_characters": 2709,
+      "public_updated_at": "2023-05-09T11:05:59+01:00",
+      "first_published_at": "2023-05-09T11:05:59+01:00"
+    },
+    {
+      "path": "/government/news/open-day-at-hm-revenue-and-customs",
+      "document_type": "news_story",
+      "withdrawn": true,
+      "withdrawn_at": "2020-09-19T13:29:47Z",
+      "body_characters": 2421,
+      "public_updated_at": "2017-02-24T16:29:00+00:00",
+      "first_published_at": "2017-02-24T16:29:00+00:00"
+    },
+    {
+      "path": "/government/publications/nr9-5dj-mr-richard-jackson-and-mrs-deborah-jackson-environmental-permit-application-advertisement/nr9-5dj-mr-richard-jackson-and-mrs-deborah-jackson-environmental-permit-application",
+      "document_type": "html_publication",
+      "withdrawn": true,
+      "withdrawn_at": "2015-12-15T13:56:33Z",
+      "body_characters": 2279,
+      "public_updated_at": "2015-11-02T17:12:10+00:00",
+      "first_published_at": "2016-10-20T16:29:16+01:00"
+    },
+    {
+      "path": "/government/case-studies/supporting-primary-and-secondary-pupils-wellbeing-at-an-academy",
+      "document_type": "case_study",
+      "withdrawn": true,
+      "withdrawn_at": "2020-10-02T09:13:43Z",
+      "body_characters": 2240,
+      "public_updated_at": "2020-05-05T18:05:00+01:00",
+      "first_published_at": "2020-05-05T18:05:00+01:00"
+    },
+    {
+      "path": "/government/publications/gu28-9ju-elizabeth-sealey-environmental-permit-application-advertisement-epryb3692nea001/gu28-9ju-elizabeth-sealey-environmental-permit-application-advertisement-epryb3692nea001",
+      "document_type": "html_publication",
+      "withdrawn": true,
+      "withdrawn_at": "2022-10-07T09:03:12Z",
+      "body_characters": 2233,
+      "public_updated_at": "2022-09-01T13:15:36+01:00",
+      "first_published_at": "2022-09-01T13:15:36+01:00"
+    },
+    {
+      "path": "/government/publications/cm23-1hn-mr-edward-pearson-environmental-permit-application-advertisement-eprzb3097eua001/cm23-1hn-mr-edward-pearson-environmental-permit-application-advertisement-eprzb3097eua001",
+      "document_type": "html_publication",
+      "withdrawn": true,
+      "withdrawn_at": "2022-12-02T14:20:06Z",
+      "body_characters": 2213,
+      "public_updated_at": "2022-11-17T15:09:09+00:00",
+      "first_published_at": "2022-11-17T15:09:09+00:00"
+    },
+    {
+      "path": "/guidance/health-and-safety-executive-information-if-the-uk-leaves-the-eu-without-a-deal",
+      "document_type": "detailed_guide",
+      "withdrawn": true,
+      "withdrawn_at": "2020-01-30T16:18:59Z",
+      "body_characters": 2163,
+      "public_updated_at": "2019-03-13T14:50:14+00:00",
+      "first_published_at": "2018-12-19T10:43:00+00:00"
+    },
+    {
+      "path": "/government/news/rugby-world-cup-advice-for-drivers",
+      "document_type": "press_release",
+      "withdrawn": true,
+      "withdrawn_at": "2017-12-11T09:25:57Z",
+      "body_characters": 1984,
+      "public_updated_at": "2015-09-23T09:12:26+01:00",
+      "first_published_at": "2015-09-23T09:12:26+01:00"
+    },
+    {
+      "path": "/government/publications/smiths-aggregates-solutions-limited-npswr034364-application-made-to-abstract-water/smiths-aggregates-solutions-limited-application-made-to-abstract-water",
+      "document_type": "html_publication",
+      "withdrawn": true,
+      "withdrawn_at": "2021-02-22T12:16:52Z",
+      "body_characters": 1731,
+      "public_updated_at": "2021-01-07T09:30:06+00:00",
+      "first_published_at": "2021-01-07T09:30:07+00:00"
+    },
+    {
+      "path": "/government/case-studies/modernising-alderneys-systems",
+      "document_type": "case_study",
+      "withdrawn": true,
+      "withdrawn_at": "2020-12-09T13:52:48Z",
+      "body_characters": 1080,
+      "public_updated_at": "2014-08-14T15:03:59+01:00",
+      "first_published_at": "2014-08-14T15:03:59+01:00"
+    },
+    {
+      "path": "/government/publications/covid-19-letter-to-patients-on-end-of-shielding-programme",
+      "document_type": "guidance",
+      "withdrawn": true,
+      "withdrawn_at": "2022-04-01T07:49:47Z",
+      "body_characters": 907,
+      "public_updated_at": "2021-09-17T00:00:00+01:00",
+      "first_published_at": "2021-09-17T00:00:00+01:00"
+    },
+    {
+      "path": "/government/publications/tr4-8pn-heyworths-farm-buildings-limited-environmental-permit-application-advertisement-eprxb3594nva001",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2022-06-09T05:22:14Z",
+      "body_characters": 896,
+      "public_updated_at": "2022-04-01T13:12:31+01:00",
+      "first_published_at": "2022-04-01T13:12:31+01:00"
+    },
+    {
+      "path": "/government/publications/cb25-0bp-turners-britannia-parks-limited-environmental-permit-application-advertisement-eprvb3092wta001",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2022-05-03T12:34:16Z",
+      "body_characters": 896,
+      "public_updated_at": "2022-02-24T15:25:43+00:00",
+      "first_published_at": "2022-02-24T15:25:43+00:00"
+    },
+    {
+      "path": "/government/publications/tr10-9al-mr-nicholas-ruddock-environmental-permit-application-advertisement-eprxb3598afa001",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2022-06-21T13:59:28Z",
+      "body_characters": 896,
+      "public_updated_at": "2022-05-12T17:58:38+01:00",
+      "first_published_at": "2022-05-12T17:58:38+01:00"
+    },
+    {
+      "path": "/government/publications/l35-3st-liverpool-sun-and-air-society-limited-environmental-permit-application-advertisement",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2018-02-09T09:41:37Z",
+      "body_characters": 876,
+      "public_updated_at": "2017-12-22T11:40:27+00:00",
+      "first_published_at": "2017-12-22T11:40:27+00:00"
+    },
+    {
+      "path": "/government/publications/de13-8eh-currall-lewis-martin-construction-limited-environmental-permit-application-advertisement-eprmb3694aaa001",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2019-05-20T14:29:59Z",
+      "body_characters": 876,
+      "public_updated_at": "2019-04-08T14:57:43+01:00",
+      "first_published_at": "2019-04-08T14:57:43+01:00"
+    },
+    {
+      "path": "/government/publications/hp4-1lr-mrs-l-cowan-and-mr-d-cowan-environmental-permit-application-advertisement-eprjb3340kxa001",
+      "document_type": "notice",
+      "withdrawn": true,
+      "withdrawn_at": "2024-11-15T11:05:28Z",
+      "body_characters": 783,
+      "public_updated_at": "2024-10-30T16:28:06+00:00",
+      "first_published_at": "2024-10-30T16:28:06+00:00"
+    }
+  ]
+}

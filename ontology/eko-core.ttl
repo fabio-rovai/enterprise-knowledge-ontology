@@ -1,0 +1,452 @@
+@prefix eko:     <https://gov.tesseract.academy/def/knowledge#> .
+@prefix ekos:    <https://gov.tesseract.academy/def/knowledge/scheme#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+
+################################################################################
+# Enterprise Knowledge Ontology (EKO) — core
+#
+# EKO formalises one distinction that organisations make informally and that no
+# published standard defines: the difference between a WORKING DOCUMENT and an
+# authoritative KNOWLEDGE ASSET.
+#
+# The load-bearing design decision:
+#   Authority is not a property of a document's content. It is a property of a
+#   live MAINTENANCE COMMITMENT attached to that document — a named accountable
+#   owner, a named maintainer, a declared review cadence, a date on which the
+#   content was last verified, and a declared scope. Remove the commitment and
+#   the same bytes become a working document again.
+#
+# This makes "is this knowledge?" a decidable, measurable question rather than
+# an editorial opinion, and it is what the Corpus Readiness Index measures.
+#
+# NOTE ON OWL SEMANTICS (read before filing an issue):
+#   OWL is open-world. The absence of a maintenance commitment in a graph does
+#   NOT entail that no commitment exists, so an OWL reasoner can never classify
+#   something as a WorkingDocument by absence. That classification is therefore
+#   made under closed-world assumptions by the SHACL layer in shapes/, not by
+#   the ontology. EKO states the necessary condition and the disjointness in
+#   OWL, and delegates the negative, corpus-scoped judgements to SHACL. This is
+#   deliberate; see docs/DESIGN_NOTES.md.
+################################################################################
+
+<https://gov.tesseract.academy/def/knowledge>
+    a owl:Ontology ;
+    dcterms:title "Enterprise Knowledge Ontology (EKO)"@en ;
+    dcterms:description """A vocabulary for governing organisational knowledge as a maintained asset: the distinction between working documents and authoritative knowledge, maintenance commitments, canonical designation, corpus lifecycle and decommissioning, structured learning capture, retention obligations, and fitness for machine retrieval."""@en ;
+    dcterms:creator "Fabio Rovai" ;
+    dcterms:publisher "Kampakis and Co Ltd t/a The Tesseract Academy" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    vann:preferredNamespacePrefix "eko" ;
+    vann:preferredNamespaceUri "https://gov.tesseract.academy/def/knowledge#" ;
+    owl:versionInfo "0.1.0" .
+
+################################################################################
+# 1. Information objects: the working-document / knowledge-asset split
+################################################################################
+
+eko:InformationObject a owl:Class ;
+    rdfs:label "Information object"@en ;
+    rdfs:comment """Any addressable unit of recorded content in the organisation's estate: a page, a document, a dashboard definition, a channel export, a repository file. Deliberately broader than "document" because a knowledge estate is not only documents."""@en .
+
+eko:MaintenanceCommitment a owl:Class ;
+    rdfs:label "Maintenance commitment"@en ;
+    rdfs:comment """A standing, named undertaking to keep a particular information object correct within a declared scope and on a declared cadence. A commitment is a first-class object, not an attribute, because it has its own lifecycle: it is made, it is honoured or breached, it lapses, and it is transferred between people. Most knowledge estates decay because commitments are transferred silently or never made at all."""@en .
+
+eko:ActiveCommitment a owl:Class ;
+    rdfs:subClassOf eko:MaintenanceCommitment ;
+    rdfs:label "Active maintenance commitment"@en ;
+    rdfs:comment """A maintenance commitment that is currently in force: it has an accountable owner, at least one named maintainer, a review cadence, and it has not been retired. A commitment whose review is overdue is still active — it is breached, not absent. That distinction matters: a breached commitment is a fixable operational failure, an absent commitment is a governance failure."""@en .
+
+eko:KnowledgeAsset a owl:Class ;
+    rdfs:subClassOf eko:InformationObject ;
+    rdfs:label "Knowledge asset"@en ;
+    rdfs:comment """An information object that is under an active maintenance commitment and has therefore been admitted to the knowledge corpus. Being well written, widely read or heavily linked does not make an information object a knowledge asset. Only a live commitment does."""@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            eko:InformationObject
+            [ a owl:Restriction ;
+              owl:onProperty eko:underCommitment ;
+              owl:someValuesFrom eko:ActiveCommitment ]
+        )
+    ] .
+
+eko:WorkingDocument a owl:Class ;
+    rdfs:subClassOf eko:InformationObject ;
+    rdfs:label "Working document"@en ;
+    rdfs:comment """An information object with no active maintenance commitment: drafts, scratchpads, meeting notes, in-flight thinking, exported analyses, decks. Working documents are legitimate and necessary. The failure mode is not their existence; it is retrieving them as though they were authoritative — by a person or, increasingly, by a retrieval system that cannot tell the difference."""@en ;
+    owl:disjointWith eko:KnowledgeAsset .
+
+eko:underCommitment a owl:ObjectProperty ;
+    rdfs:label "under commitment"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:MaintenanceCommitment ;
+    rdfs:comment "Links an information object to the maintenance commitment that governs it."@en .
+
+################################################################################
+# 2. The federated model: agents, roles, domains
+################################################################################
+
+eko:Domain a owl:Class ;
+    rdfs:label "Knowledge domain"@en ;
+    rdfs:comment """A bounded subject area of the organisation's knowledge map — a product line, a regulatory regime, a market, a platform. Domains are the unit at which the federated model assigns a named expert and a named maintainer, and the unit at which coverage gaps are counted."""@en .
+
+eko:Topic a owl:Class ;
+    rdfs:label "Topic"@en ;
+    rdfs:comment """A question an employee or a retrieval system might have an answer for. Topics are finer than domains and are the unit of canonical designation: for a given topic within a given scope there should be exactly one authoritative source."""@en .
+
+eko:Scope a owl:Class ;
+    rdfs:label "Scope"@en ;
+    rdfs:comment """The qualification under which a statement is authoritative: typically a combination of jurisdiction, audience and product line. Scope is what makes two apparently contradictory documents both correct, and its absence is what makes contradiction detection produce false positives."""@en .
+
+eko:RoleAssignment a owl:Class ;
+    rdfs:label "Role assignment"@en ;
+    rdfs:comment """A reified statement that a particular agent holds a particular knowledge role over a particular domain or asset for a particular period. Reified because the federated model lives or dies on knowing when a named person stopped being the maintainer, and a direct property cannot record that."""@en .
+
+eko:assignedAgent a owl:ObjectProperty ;
+    rdfs:label "assigned agent"@en ;
+    rdfs:domain eko:RoleAssignment ;
+    rdfs:range prov:Agent .
+
+eko:assignedRole a owl:ObjectProperty ;
+    rdfs:label "assigned role"@en ;
+    rdfs:domain eko:RoleAssignment ;
+    rdfs:range skos:Concept ;
+    rdfs:comment "A concept from the knowledge-role scheme (owner, maintainer, expert, custodian, approver)."@en .
+
+eko:assignmentOver a owl:ObjectProperty ;
+    rdfs:label "assignment over"@en ;
+    rdfs:domain eko:RoleAssignment ;
+    rdfs:comment "The domain or information object the role is held over."@en .
+
+eko:assignmentFrom a owl:DatatypeProperty ;
+    rdfs:label "assignment from"@en ;
+    rdfs:domain eko:RoleAssignment ;
+    rdfs:range xsd:date .
+
+eko:assignmentUntil a owl:DatatypeProperty ;
+    rdfs:label "assignment until"@en ;
+    rdfs:domain eko:RoleAssignment ;
+    rdfs:range xsd:date .
+
+eko:accountableOwner a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "accountable owner"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range prov:Agent ;
+    rdfs:comment """The single named agent accountable for the asset being correct. Functional by design: shared accountability is the most common way a commitment silently becomes nobody's."""@en .
+
+eko:namedMaintainer a owl:ObjectProperty ;
+    rdfs:label "named maintainer"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range prov:Agent ;
+    rdfs:comment "The agent who actually does the editing work. May differ from the owner and may be plural."@en .
+
+eko:domainExpert a owl:ObjectProperty ;
+    rdfs:label "domain expert"@en ;
+    rdfs:domain eko:Domain ;
+    rdfs:range prov:Agent ;
+    rdfs:comment "The named person whose judgement settles substantive questions in the domain."@en .
+
+eko:domainMaintainer a owl:ObjectProperty ;
+    rdfs:label "domain maintainer"@en ;
+    rdfs:domain eko:Domain ;
+    rdfs:range prov:Agent .
+
+eko:coversDomain a owl:ObjectProperty ;
+    rdfs:label "covers domain"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:Domain .
+
+################################################################################
+# 3. Commitment terms and lifecycle
+################################################################################
+
+eko:reviewCadence a owl:DatatypeProperty ;
+    rdfs:label "review cadence"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range xsd:duration ;
+    rdfs:comment """The maximum interval the owner commits to between verifications. Expressed as an xsd:duration (P6M, P1Y). A corpus with no declared cadences cannot be measured for freshness, only for recency of edit — which is a different and much weaker thing, because an edit that fixes a typo resets recency without verifying a single fact."""@en .
+
+eko:lastVerified a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "last verified"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range xsd:date ;
+    rdfs:comment """The date a human with authority last confirmed the content is still true. Distinct from last-modified: verification is an assertion about the world, modification is an event in a content system. Conflating the two is the single most common measurement error in knowledge estates."""@en .
+
+eko:nextReviewDue a owl:DatatypeProperty ;
+    rdfs:label "next review due"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range xsd:date .
+
+eko:scopeStatement a owl:DatatypeProperty ;
+    rdfs:label "scope statement"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range xsd:string ;
+    rdfs:comment "A plain statement of what the commitment does and does not cover. Required, because an unbounded commitment is not a commitment."@en .
+
+eko:commitmentState a owl:ObjectProperty ;
+    rdfs:label "commitment state"@en ;
+    rdfs:domain eko:MaintenanceCommitment ;
+    rdfs:range skos:Concept .
+
+eko:lifecycleState a owl:ObjectProperty ;
+    rdfs:label "lifecycle state"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range skos:Concept ;
+    rdfs:comment "A concept from the lifecycle scheme: draft, proposed, published, under review, stale, superseded, withdrawn, decommissioned."@en .
+
+eko:authorityLevel a owl:ObjectProperty ;
+    rdfs:label "authority level"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range skos:Concept .
+
+eko:assetType a owl:ObjectProperty ;
+    rdfs:label "asset type"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range skos:Concept .
+
+eko:supersededBy a owl:ObjectProperty ;
+    rdfs:label "superseded by"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:InformationObject ;
+    owl:inverseOf eko:supersedes .
+
+eko:supersedes a owl:ObjectProperty ;
+    rdfs:label "supersedes"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:InformationObject .
+
+eko:withdrawnOn a owl:DatatypeProperty ;
+    rdfs:label "withdrawn on"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range xsd:date .
+
+eko:decommissionedOn a owl:DatatypeProperty ;
+    rdfs:label "decommissioned on"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range xsd:date ;
+    rdfs:comment """The date the object was removed from the live estate and from every retrieval index. Decommissioning is modelled as a first-class event with its own date and reason because in practice it is the activity that never happens, and what is never measured is never done."""@en .
+
+eko:decommissionReason a owl:ObjectProperty ;
+    rdfs:label "decommission reason"@en ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range skos:Concept .
+
+################################################################################
+# 4. Canonical designation — the index the organisation actually needs
+################################################################################
+
+eko:CanonicalDesignation a owl:Class ;
+    rdfs:label "Canonical designation"@en ;
+    rdfs:comment """A reified statement that a given asset is THE authoritative source on a given topic within a given scope, from a given date, designated by a named agent. Reified rather than expressed as a direct property because canonicity is contested, time-bounded and scope-bounded, and because an index entry without a designator is a rumour."""@en .
+
+eko:designatedAsset a owl:ObjectProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range eko:KnowledgeAsset ;
+    rdfs:label "designated asset"@en .
+
+eko:designatedTopic a owl:ObjectProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range eko:Topic ;
+    rdfs:label "designated topic"@en .
+
+eko:designationScope a owl:ObjectProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range eko:Scope ;
+    rdfs:label "designation scope"@en .
+
+eko:designatedBy a owl:ObjectProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range prov:Agent ;
+    rdfs:label "designated by"@en .
+
+eko:designationFrom a owl:DatatypeProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range xsd:date ;
+    rdfs:label "designation from"@en .
+
+eko:designationUntil a owl:DatatypeProperty ;
+    rdfs:domain eko:CanonicalDesignation ;
+    rdfs:range xsd:date ;
+    rdfs:label "designation until"@en .
+
+################################################################################
+# 5. Claims — what makes contradiction detection tractable
+################################################################################
+
+eko:Claim a owl:Class ;
+    rdfs:label "Claim"@en ;
+    rdfs:comment """A load-bearing assertion carried by an information object: a rate, a threshold, a permission, a deadline, an obligation. Contradiction is a relation between claims, not between documents. Two documents that disagree about a fee and agree about everything else are not "contradictory documents"; they carry one contradictory claim pair, and only that pair needs resolving."""@en .
+
+eko:assertedIn a owl:ObjectProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:range eko:InformationObject ;
+    rdfs:label "asserted in"@en .
+
+eko:claimSubject a owl:ObjectProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:label "claim subject"@en ;
+    rdfs:comment "What the claim is about, so that claims about the same subject can be compared."@en .
+
+eko:claimText a owl:DatatypeProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:range xsd:string ;
+    rdfs:label "claim text"@en .
+
+eko:claimScope a owl:ObjectProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:range eko:Scope ;
+    rdfs:label "claim scope"@en .
+
+eko:validFrom a owl:DatatypeProperty ;
+    rdfs:range xsd:date ;
+    rdfs:label "valid from"@en .
+
+eko:validUntil a owl:DatatypeProperty ;
+    rdfs:range xsd:date ;
+    rdfs:label "valid until"@en .
+
+eko:contradicts a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:range eko:Claim ;
+    rdfs:label "contradicts"@en ;
+    rdfs:comment """Asserts that two claims cannot both be true of the same subject within overlapping scope and overlapping validity. Symmetric. Machine-suggested contradictions should be recorded as candidates and confirmed by the domain expert before this property is asserted."""@en .
+
+eko:evidenceSource a owl:ObjectProperty ;
+    rdfs:domain eko:Claim ;
+    rdfs:label "evidence source"@en ;
+    rdfs:comment "The external authority the claim rests on: a regulation, a contract, a measurement, a decision record."@en .
+
+################################################################################
+# 6. Compounding learning
+################################################################################
+
+eko:LearningRecord a owl:Class ;
+    rdfs:subClassOf eko:KnowledgeAsset ;
+    rdfs:label "Learning record"@en ;
+    rdfs:comment """The structured residue of a significant piece of work: what was the question, what was decided, what actually happened, and what would be done differently. The fourth and third elements are the point. Architecture decision records and their many descendants capture the question and the decision and then almost never return to record the outcome, which is why decision logs age into a list of intentions rather than a body of evidence."""@en .
+
+eko:learningQuestion a owl:DatatypeProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "question"@en .
+
+eko:decisionTaken a owl:DatatypeProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "decision taken"@en .
+
+eko:observedOutcome a owl:DatatypeProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "observed outcome"@en .
+
+eko:counterfactual a owl:DatatypeProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range xsd:string ;
+    rdfs:label "what we would do differently"@en .
+
+eko:outcomeObservedOn a owl:DatatypeProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range xsd:date ;
+    rdfs:label "outcome observed on"@en .
+
+eko:learningTrigger a owl:ObjectProperty ;
+    rdfs:domain eko:LearningRecord ;
+    rdfs:range skos:Concept ;
+    rdfs:label "learning trigger"@en ;
+    rdfs:comment "The moment that generated the learning: launch, incident, regulatory response, corporate transaction, experiment, quarterly business review, retrospective."@en .
+
+################################################################################
+# 7. Obligations: access, classification, retention
+################################################################################
+
+eko:accessLabel a owl:ObjectProperty ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range skos:Concept ;
+    rdfs:label "access label"@en ;
+    rdfs:comment """The classification that governs who may see the object. Load-bearing for retrieval: an assistant that answers from a document the asker could not have opened has not made a helpful inference, it has caused a disclosure."""@en .
+
+eko:RetentionRule a owl:Class ;
+    rdfs:label "Retention rule"@en ;
+    rdfs:comment "A statement of how long an object must or may be kept, on whose authority, in which jurisdiction, and what happens at the end."@en .
+
+eko:retentionRule a owl:ObjectProperty ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:RetentionRule ;
+    rdfs:label "retention rule"@en .
+
+eko:retentionBasis a owl:DatatypeProperty ;
+    rdfs:domain eko:RetentionRule ;
+    rdfs:range xsd:string ;
+    rdfs:label "retention basis"@en ;
+    rdfs:comment "The cited legal or regulatory instrument and provision the retention period rests on. A retention period with no cited basis is a guess with a number attached."@en .
+
+eko:retentionPeriod a owl:DatatypeProperty ;
+    rdfs:domain eko:RetentionRule ;
+    rdfs:range xsd:duration ;
+    rdfs:label "retention period"@en .
+
+eko:retentionJurisdiction a owl:ObjectProperty ;
+    rdfs:domain eko:RetentionRule ;
+    rdfs:label "retention jurisdiction"@en .
+
+eko:disposalAction a owl:ObjectProperty ;
+    rdfs:domain eko:RetentionRule ;
+    rdfs:range skos:Concept ;
+    rdfs:label "disposal action"@en .
+
+################################################################################
+# 8. Retrieval fitness — what "AI-ready" has to mean to be testable
+################################################################################
+
+eko:RetrievalProfile a owl:Class ;
+    rdfs:label "Retrieval profile"@en ;
+    rdfs:comment """The declaration, from the knowledge side, of how an object should be treated by systems that index and serve it. The knowledge owner owns this; the platform team owns the system that honours it. Separating the two is what stops "AI-ready" from meaning whatever the last vendor said it meant."""@en .
+
+eko:retrievalProfile a owl:ObjectProperty ;
+    rdfs:domain eko:InformationObject ;
+    rdfs:range eko:RetrievalProfile ;
+    rdfs:label "retrieval profile"@en .
+
+eko:indexEligible a owl:DatatypeProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "index eligible"@en ;
+    rdfs:comment "Whether the object may enter a retrieval index at all. The default for working documents should be false, and almost nowhere is."@en .
+
+eko:groundingPriority a owl:DatatypeProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:range xsd:integer ;
+    rdfs:label "grounding priority"@en ;
+    rdfs:comment "Relative precedence when several objects could answer the same question. Rank 1 should be reserved for the canonically designated asset for that topic and scope."@en .
+
+eko:chunkingUnit a owl:ObjectProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:range skos:Concept ;
+    rdfs:label "chunking unit"@en ;
+    rdfs:comment "The semantic unit the owner asserts is safe to split on without destroying meaning: section, clause, table row, whole document."@en .
+
+eko:permissionModel a owl:ObjectProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:range skos:Concept ;
+    rdfs:label "permission model"@en ;
+    rdfs:comment "How access control must be enforced at retrieval time: inherit from source, per-chunk, deny-by-default."@en .
+
+eko:machineReadableAt a owl:ObjectProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:label "machine readable at"@en ;
+    rdfs:comment "A stable address at which the object's content is available in a structured form, distinct from its human-facing rendering."@en .
+
+eko:freshnessHorizon a owl:DatatypeProperty ;
+    rdfs:domain eko:RetrievalProfile ;
+    rdfs:range xsd:duration ;
+    rdfs:label "freshness horizon"@en ;
+    rdfs:comment "The age beyond which the object must not be served as a grounded answer without a staleness warning, even if it is still published."@en .

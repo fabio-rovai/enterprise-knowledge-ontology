@@ -1,0 +1,248 @@
+@prefix eko:     <https://gov.tesseract.academy/def/knowledge#> .
+@prefix ekos:    <https://gov.tesseract.academy/def/knowledge/scheme#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+################################################################################
+# EKO controlled vocabularies.
+#
+# Every scheme here exists because a SHACL rule or a Corpus Readiness Index
+# dimension needs a closed set of values to test against. Vocabularies with no
+# enforcement attached are decoration.
+################################################################################
+
+################################################################################
+# Scheme 1 — Lifecycle state
+################################################################################
+
+ekos:lifecycle a skos:ConceptScheme ;
+    dcterms:title "Knowledge asset lifecycle state"@en ;
+    skos:hasTopConcept ekos:draft , ekos:proposed , ekos:published ,
+        ekos:under-review , ekos:stale , ekos:superseded , ekos:withdrawn ,
+        ekos:decommissioned .
+
+ekos:draft a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Draft"@en ;
+    skos:definition "Being written. Never eligible for the corpus or a retrieval index."@en .
+
+ekos:proposed a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Proposed"@en ;
+    skos:definition "Submitted for admission to the corpus and awaiting the publish gate."@en .
+
+ekos:published a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Published"@en ;
+    skos:definition "In the corpus, under an active commitment, within its review cadence."@en .
+
+ekos:under-review a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Under review"@en ;
+    skos:definition "In the corpus and being actively re-verified. Still served, because withdrawing content during review pushes readers to worse sources."@en .
+
+ekos:stale a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Stale"@en ;
+    skos:definition "Past its declared review cadence with no verification recorded. Still in the corpus but must be served with a staleness warning and must lose canonical rank."@en ;
+    skos:scopeNote "Stale is a state, not a judgement about correctness. Stale content is often still right; the point is that nobody has said so recently enough for a reader or a retrieval system to rely on it."@en .
+
+ekos:superseded a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Superseded"@en ;
+    skos:definition "Replaced by a named successor asset. Must carry a pointer to that successor."@en .
+
+ekos:withdrawn a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Withdrawn"@en ;
+    skos:definition "No longer to be relied on, but retained and reachable, typically because a retention obligation or an audit trail requires it."@en .
+
+ekos:decommissioned a skos:Concept ; skos:inScheme ekos:lifecycle ;
+    skos:prefLabel "Decommissioned"@en ;
+    skos:definition "Removed from the live estate and from every retrieval index, with a recorded date and reason. The state that most estates never reach."@en .
+
+################################################################################
+# Scheme 2 — Authority level
+################################################################################
+
+ekos:authority a skos:ConceptScheme ;
+    dcterms:title "Authority level"@en ;
+    skos:hasTopConcept ekos:authoritative , ekos:endorsed , ekos:informational ,
+        ekos:working , ekos:deprecated .
+
+ekos:authoritative a skos:Concept ; skos:inScheme ekos:authority ;
+    skos:prefLabel "Authoritative"@en ;
+    skos:definition "The organisation stands behind this and will defend it. Eligible for canonical designation."@en .
+
+ekos:endorsed a skos:Concept ; skos:inScheme ekos:authority ;
+    skos:prefLabel "Endorsed"@en ;
+    skos:definition "Reviewed and considered sound, but not the single source of record on its topic."@en .
+
+ekos:informational a skos:Concept ; skos:inScheme ekos:authority ;
+    skos:prefLabel "Informational"@en ;
+    skos:definition "Useful context. Explicitly not something to act on without checking the authoritative source."@en .
+
+ekos:working a skos:Concept ; skos:inScheme ekos:authority ;
+    skos:prefLabel "Working"@en ;
+    skos:definition "In-flight thinking. Legitimate, and never to be served as a grounded answer."@en .
+
+ekos:deprecated a skos:Concept ; skos:inScheme ekos:authority ;
+    skos:prefLabel "Deprecated"@en ;
+    skos:definition "Known to be wrong or overtaken, kept only for the record."@en .
+
+################################################################################
+# Scheme 3 — Asset type
+################################################################################
+
+ekos:asset-type a skos:ConceptScheme ;
+    dcterms:title "Knowledge asset type"@en .
+
+ekos:policy a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Policy"@en ; skos:definition "A rule the organisation binds itself to."@en .
+ekos:procedure a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Procedure"@en ; skos:definition "How a task is to be carried out."@en .
+ekos:standard a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Standard"@en ; skos:definition "A specification others must conform to."@en .
+ekos:definition-record a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Definition"@en ;
+    skos:definition "The agreed meaning of a term or metric. The highest-leverage asset type and the most commonly missing: most contradictions in a corpus are two teams using one word for two things."@en .
+ekos:regulatory-interpretation a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Regulatory interpretation"@en ;
+    skos:definition "The organisation's settled reading of an external obligation, with the obligation cited."@en .
+ekos:product-reference a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Product reference"@en ; skos:definition "What a product does, for whom, on what terms."@en .
+ekos:market-analysis a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Market analysis"@en ; skos:definition "A reading of an external market. Ages fastest of all asset types and is most often left undated."@en .
+ekos:decision-record a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Decision record"@en ; skos:definition "What was decided, by whom, on what basis."@en .
+ekos:incident-learning a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Incident learning"@en ; skos:definition "What broke, why, and what changed as a result."@en .
+ekos:runbook a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Runbook"@en ; skos:definition "Operational steps executed under time pressure."@en .
+ekos:reference-data a skos:Concept ; skos:inScheme ekos:asset-type ;
+    skos:prefLabel "Reference data"@en ; skos:definition "Values other content depends on: rates, thresholds, codes, limits."@en .
+
+################################################################################
+# Scheme 4 — Knowledge roles (the federated model)
+################################################################################
+
+ekos:role a skos:ConceptScheme ;
+    dcterms:title "Knowledge role"@en .
+
+ekos:owner a skos:Concept ; skos:inScheme ekos:role ;
+    skos:prefLabel "Owner"@en ;
+    skos:definition "Single named person accountable for the asset being correct. Cannot be a team, a rota or a mailbox."@en .
+ekos:maintainer a skos:Concept ; skos:inScheme ekos:role ;
+    skos:prefLabel "Maintainer"@en ;
+    skos:definition "Named person who does the editing and runs the review. May be plural, may differ from the owner."@en .
+ekos:expert a skos:Concept ; skos:inScheme ekos:role ;
+    skos:prefLabel "Domain expert"@en ;
+    skos:definition "Named person whose judgement settles substantive disputes in the domain."@en .
+ekos:custodian a skos:Concept ; skos:inScheme ekos:role ;
+    skos:prefLabel "Custodian"@en ;
+    skos:definition "The team accountable for the system the asset lives in and for enforcing its access controls. Owns the platform, never the content."@en .
+ekos:approver a skos:Concept ; skos:inScheme ekos:role ;
+    skos:prefLabel "Approver"@en ;
+    skos:definition "Named person who operates the publish gate for a domain."@en .
+
+################################################################################
+# Scheme 5 — Access classification
+################################################################################
+
+ekos:access a skos:ConceptScheme ;
+    dcterms:title "Access classification"@en .
+
+ekos:public a skos:Concept ; skos:inScheme ekos:access ; skos:prefLabel "Public"@en .
+ekos:internal a skos:Concept ; skos:inScheme ekos:access ; skos:prefLabel "Internal"@en .
+ekos:confidential a skos:Concept ; skos:inScheme ekos:access ; skos:prefLabel "Confidential"@en .
+ekos:restricted a skos:Concept ; skos:inScheme ekos:access ;
+    skos:prefLabel "Restricted"@en ;
+    skos:definition "Access granted by named individual. Never eligible for a shared retrieval index without per-request permission enforcement."@en .
+ekos:regulated-record a skos:Concept ; skos:inScheme ekos:access ;
+    skos:prefLabel "Regulated record"@en ;
+    skos:definition "Subject to a specific retention and production obligation. Deletion is a compliance event, not a housekeeping decision."@en .
+
+################################################################################
+# Scheme 6 — Decommission reason
+################################################################################
+
+ekos:decommission-reason a skos:ConceptScheme ;
+    dcterms:title "Decommission reason"@en .
+
+ekos:reason-superseded a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "Superseded by a successor"@en .
+ekos:reason-obsolete a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "Subject no longer exists"@en ;
+    skos:definition "The product, process, team or obligation the content describes has gone."@en .
+ekos:reason-duplicate a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "Duplicate of a canonical asset"@en .
+ekos:reason-unowned a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "No owner could be found"@en ;
+    skos:definition "Nobody would take the commitment. The correct outcome is removal, not indefinite orphan status."@en .
+ekos:reason-unused a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "No retrieval or readership over the observation window"@en .
+ekos:reason-retention-expired a skos:Concept ; skos:inScheme ekos:decommission-reason ;
+    skos:prefLabel "Retention period expired"@en .
+
+################################################################################
+# Scheme 7 — Learning trigger
+################################################################################
+
+ekos:learning-trigger a skos:ConceptScheme ;
+    dcterms:title "Learning trigger"@en ;
+    skos:note "The moments that generate knowledge worth keeping. Capture at the moment, because retrofitting produces a tidy narrative rather than a record."@en .
+
+ekos:trigger-launch a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Launch"@en .
+ekos:trigger-incident a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Incident"@en .
+ekos:trigger-regulatory a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Regulatory response"@en .
+ekos:trigger-transaction a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Corporate transaction"@en .
+ekos:trigger-experiment a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Experiment"@en .
+ekos:trigger-qbr a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Quarterly business review"@en .
+ekos:trigger-retro a skos:Concept ; skos:inScheme ekos:learning-trigger ; skos:prefLabel "Retrospective"@en .
+
+################################################################################
+# Scheme 8 — Chunking unit (retrieval)
+################################################################################
+
+ekos:chunking a skos:ConceptScheme ;
+    dcterms:title "Safe chunking unit"@en ;
+    skos:note "Declared by the content owner, honoured by the platform. The owner knows that splitting a table of thresholds row-wise destroys its meaning; the indexing pipeline does not."@en .
+
+ekos:chunk-document a skos:Concept ; skos:inScheme ekos:chunking ; skos:prefLabel "Whole document"@en .
+ekos:chunk-section a skos:Concept ; skos:inScheme ekos:chunking ; skos:prefLabel "Section"@en .
+ekos:chunk-clause a skos:Concept ; skos:inScheme ekos:chunking ; skos:prefLabel "Clause"@en .
+ekos:chunk-table a skos:Concept ; skos:inScheme ekos:chunking ;
+    skos:prefLabel "Whole table"@en ;
+    skos:definition "The table must never be split. Splitting separates a value from the condition that qualifies it."@en .
+ekos:chunk-none a skos:Concept ; skos:inScheme ekos:chunking ;
+    skos:prefLabel "Do not chunk"@en ;
+    skos:definition "Serve whole or not at all."@en .
+
+################################################################################
+# Scheme 9 — Permission model at retrieval time
+################################################################################
+
+ekos:permission a skos:ConceptScheme ;
+    dcterms:title "Retrieval permission model"@en .
+
+ekos:perm-inherit a skos:Concept ; skos:inScheme ekos:permission ;
+    skos:prefLabel "Inherit from source system"@en .
+ekos:perm-per-chunk a skos:Concept ; skos:inScheme ekos:permission ;
+    skos:prefLabel "Enforce per chunk"@en ;
+    skos:definition "Required where a single document mixes classifications, which is the normal case for board papers and incident reports."@en .
+ekos:perm-deny-default a skos:Concept ; skos:inScheme ekos:permission ;
+    skos:prefLabel "Deny by default"@en .
+
+################################################################################
+# Scheme 10 — Commitment state
+################################################################################
+
+ekos:commitment-state a skos:ConceptScheme ;
+    dcterms:title "Maintenance commitment state"@en .
+
+ekos:commitment-active a skos:Concept ; skos:inScheme ekos:commitment-state ;
+    skos:prefLabel "Active"@en ; skos:definition "In force and within cadence."@en .
+ekos:commitment-breached a skos:Concept ; skos:inScheme ekos:commitment-state ;
+    skos:prefLabel "Breached"@en ;
+    skos:definition "In force but overdue. An operational failure with a named person attached to it, which is what makes it fixable."@en .
+ekos:commitment-lapsed a skos:Concept ; skos:inScheme ekos:commitment-state ;
+    skos:prefLabel "Lapsed"@en ;
+    skos:definition "The owner or maintainer has left the role and no successor was named. The dominant real-world failure and the one no content system detects."@en .
+ekos:commitment-retired a skos:Concept ; skos:inScheme ekos:commitment-state ;
+    skos:prefLabel "Retired"@en ;
+    skos:definition "Deliberately ended, with the asset moved out of the corpus."@en .

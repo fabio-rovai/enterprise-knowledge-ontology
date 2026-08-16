@@ -1,0 +1,183 @@
+{
+  "sampled": 300,
+  "fetched": 300,
+  "errors": 0,
+  "documents_by_type": {
+    "notice": 30,
+    "detailed_guide": 55,
+    "guidance": 141,
+    "form": 30,
+    "international_treaty": 10,
+    "guide": 6,
+    "manual": 1,
+    "statutory_guidance": 6,
+    "regulation": 4,
+    "manual_section": 17
+  },
+  "distinct_json_keys_observed": 133,
+  "keys_matching_commitment_vocabulary": {},
+  "documents_with_any_commitment_field": 0,
+  "examples": [],
+  "most_common_keys": [
+    [
+      "title",
+      4774
+    ],
+    [
+      "locale",
+      4178
+    ],
+    [
+      "base_path",
+      4139
+    ],
+    [
+      "content_id",
+      4112
+    ],
+    [
+      "document_type",
+      4112
+    ],
+    [
+      "links",
+      4112
+    ],
+    [
+      "schema_name",
+      3836
+    ],
+    [
+      "web_url",
+      3816
+    ],
+    [
+      "api_path",
+      3798
+    ],
+    [
+      "api_url",
+      3798
+    ],
+    [
+      "withdrawn",
+      3536
+    ],
+    [
+      "public_updated_at",
+      2937
+    ],
+    [
+      "details",
+      2567
+    ],
+    [
+      "url",
+      2299
+    ],
+    [
+      "phase",
+      1386
+    ],
+    [
+      "analytics_identifier",
+      1213
+    ],
+    [
+      "updated_at",
+      1199
+    ],
+    [
+      "id",
+      1175
+    ],
+    [
+      "note",
+      1093
+    ],
+    [
+      "public_timestamp",
+      1093
+    ],
+    [
+      "internal_name",
+      1086
+    ],
+    [
+      "notes_for_editors",
+      1086
+    ],
+    [
+      "visible_to_departmental_editors",
+      1076
+    ],
+    [
+      "description",
+      999
+    ],
+    [
+      "acronym",
+      899
+    ],
+    [
+      "brand",
+      899
+    ],
+    [
+      "default_news_image",
+      899
+    ],
+    [
+      "logo",
+      899
+    ],
+    [
+      "crest",
+      899
+    ],
+    [
+      "formatted_title",
+      899
+    ],
+    [
+      "organisation_govuk_status",
+      899
+    ],
+    [
+      "status",
+      899
+    ],
+    [
+      "filename",
+      774
+    ],
+    [
+      "text",
+      739
+    ],
+    [
+      "high_resolution_url",
+      690
+    ],
+    [
+      "parent_taxons",
+      662
+    ],
+    [
+      "level",
+      615
+    ],
+    [
+      "attachment_type",
+      560
+    ],
+    [
+      "unnumbered_command_paper",
+      441
+    ],
+    [
+      "unnumbered_hoc_paper",
+      441
+    ]
+  ]
+}

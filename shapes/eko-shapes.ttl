@@ -1,0 +1,345 @@
+@prefix eko:  <https://gov.tesseract.academy/def/knowledge#> .
+@prefix ekos: <https://gov.tesseract.academy/def/knowledge/scheme#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+################################################################################
+# EKO SHACL — Layers 1 and 2: the publish gate.
+#
+# This is the machine-checkable version of "a higher bar for publishing to the
+# knowledge corpus". Everything here is a closed-world test, which is why it
+# lives in SHACL and not in the OWL file: the questions being asked are of the
+# form "is there no owner recorded?", and OWL cannot answer that.
+#
+# Severity convention:
+#   sh:Violation — the asset must not enter or remain in the corpus.
+#   sh:Warning   — admissible, but the asset loses canonical rank and must be
+#                  served with a caveat.
+#   sh:Info      — a maintenance signal for the backlog.
+################################################################################
+
+eko:prefixes
+    sh:declare [ sh:prefix "eko" ;
+                 sh:namespace "https://gov.tesseract.academy/def/knowledge#"^^xsd:anyURI ] ,
+               [ sh:prefix "ekos" ;
+                 sh:namespace "https://gov.tesseract.academy/def/knowledge/scheme#"^^xsd:anyURI ] ,
+               [ sh:prefix "xsd" ;
+                 sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ] .
+
+################################################################################
+# LAYER 1 — Structural: what a knowledge asset must carry
+################################################################################
+
+eko:KnowledgeAssetShape
+    a sh:NodeShape ;
+    sh:targetClass eko:KnowledgeAsset ;
+    rdfs:label "Publish gate: structural requirements"@en ;
+
+    sh:property [
+        sh:path eko:underCommitment ;
+        sh:minCount 1 ;
+        sh:class eko:MaintenanceCommitment ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must be under a maintenance commitment. Without one it is a working document, however good it is."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:authorityLevel ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( ekos:authoritative ekos:endorsed ekos:informational ekos:deprecated ) ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must declare exactly one authority level, and it may not be 'working'."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:accessLabel ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must carry an access classification. An unclassified asset cannot be safely indexed for retrieval, because the index cannot decide who may see the answer it grounds."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:assetType ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must declare its type. Type drives review cadence: a rate table and a strategy narrative do not age at the same speed."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:coversDomain ;
+        sh:minCount 1 ;
+        sh:class eko:Domain ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must sit in at least one domain, so that it inherits a named expert and a named maintainer."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:lifecycleState ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "A knowledge asset must declare exactly one lifecycle state."@en ;
+    ] .
+
+eko:MaintenanceCommitmentShape
+    a sh:NodeShape ;
+    sh:targetClass eko:MaintenanceCommitment ;
+    rdfs:label "Publish gate: what makes a commitment real"@en ;
+
+    sh:property [
+        sh:path eko:accountableOwner ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must name exactly one accountable owner. Two owners is zero owners."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:namedMaintainer ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must name at least one maintainer who does the work."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:reviewCadence ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:duration ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must declare a review cadence as a duration. A corpus without declared cadences can only be measured for edit recency, which is not the same as freshness."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:lastVerified ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:lessThanOrEquals eko:nextReviewDue ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must record the date content was last verified as still true, distinct from when the file was last touched."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:scopeStatement ;
+        sh:minCount 1 ;
+        sh:minLength 20 ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must state what it covers and what it does not. An unbounded commitment is not a commitment."@en ;
+    ] ;
+
+    sh:property [
+        sh:path eko:commitmentState ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( ekos:commitment-active ekos:commitment-breached ekos:commitment-lapsed ekos:commitment-retired ) ;
+        sh:severity sh:Violation ;
+        sh:message "A commitment must declare its state."@en ;
+    ] .
+
+################################################################################
+# LAYER 2 — Lifecycle and temporal consistency
+################################################################################
+
+eko:SupersessionShape
+    a sh:NodeShape ;
+    sh:targetClass eko:InformationObject ;
+    rdfs:label "Superseded content must point at its successor"@en ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "Asset is marked superseded but names no successor. A dead end is worse than no page, because the reader stops looking."@en ;
+        sh:prefixes eko:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eko:lifecycleState
+                      ekos:superseded .
+                FILTER NOT EXISTS {
+                    $this eko:supersededBy ?successor .
+                }
+            }
+        """ ;
+    ] .
+
+eko:WithdrawnNotCanonicalShape
+    a sh:NodeShape ;
+    sh:targetClass eko:CanonicalDesignation ;
+    rdfs:label "Withdrawn or decommissioned content cannot be canonical"@en ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "A withdrawn or decommissioned asset holds a live canonical designation. This is the single most damaging state in a retrieval-backed estate: the index confidently serves content the organisation has formally disowned."@en ;
+        sh:prefixes eko:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eko:designatedAsset ?asset .
+                ?asset eko:lifecycleState ?state .
+                FILTER (?state IN (
+                    ekos:withdrawn,
+                    ekos:decommissioned
+                ))
+                FILTER NOT EXISTS {
+                    $this eko:designationUntil ?until .
+                }
+            }
+        """ ;
+    ] .
+
+eko:StaleNotPublishedShape
+    a sh:NodeShape ;
+    sh:targetClass eko:KnowledgeAsset ;
+    rdfs:label "Overdue assets must be marked stale, not published"@en ;
+    # The comparison is lexicographic rather than typed. Both xsd:dateTime(?due)
+    # and xsd:date(NOW()) silently return no rows in rdflib 7.6.0 rather than
+    # raising, which produces a rule that appears to pass and in fact never
+    # fires. ISO-8601 dates sort correctly as strings, so STR() comparison is
+    # both correct and portable here. Verified against a known-overdue and a
+    # known-future date in tests/test_shapes.py.
+    sh:sparql [
+        sh:severity sh:Warning ;
+        sh:message "Asset is past its own declared review date but still claims the 'published' state. Either verify it or mark it stale; continuing to present it as current is the corpus telling its readers something it has not checked."@en ;
+        sh:prefixes eko:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eko:lifecycleState
+                      ekos:published .
+                $this eko:underCommitment ?c .
+                ?c eko:nextReviewDue ?due .
+                FILTER (STR(?due) < STR(NOW()))
+            }
+        """ ;
+    ] .
+
+eko:LearningRecordShape
+    a sh:NodeShape ;
+    sh:targetClass eko:LearningRecord ;
+    rdfs:label "A learning record without an outcome is an intention"@en ;
+
+    sh:property [
+        sh:path eko:learningQuestion ;
+        sh:minCount 1 ; sh:minLength 10 ;
+        sh:severity sh:Violation ;
+        sh:message "State the question that was actually being answered."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:decisionTaken ;
+        sh:minCount 1 ; sh:minLength 10 ;
+        sh:severity sh:Violation ;
+        sh:message "State what was decided."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:learningTrigger ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Record which moment generated this: a launch, an incident, a regulatory response, a transaction, an experiment, a review."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:observedOutcome ;
+        sh:minCount 1 ; sh:minLength 10 ;
+        sh:severity sh:Warning ;
+        sh:message "No outcome recorded. Decision records that never return to say what happened accumulate into a list of intentions, which is why most decision logs are read once and never again."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:counterfactual ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "No counterfactual recorded. 'What we would do differently' is the only part of a learning record that changes anyone's future behaviour."@en ;
+    ] .
+
+################################################################################
+# LAYER 2b — Retrieval readiness
+################################################################################
+
+eko:RetrievalProfileShape
+    a sh:NodeShape ;
+    sh:targetClass eko:RetrievalProfile ;
+    rdfs:label "What the knowledge side must specify to the platform side"@en ;
+
+    sh:property [
+        sh:path eko:indexEligible ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:severity sh:Violation ;
+        sh:message "State explicitly whether this object may enter a retrieval index. Silence is currently read as yes by every ingestion pipeline in production."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:permissionModel ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "State how access control must be enforced at retrieval time."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:chunkingUnit ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Declare the safe chunking unit. The owner knows a threshold table must not be split; the ingestion pipeline does not."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:freshnessHorizon ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Declare the age beyond which this must not be served as a grounded answer without a staleness warning."@en ;
+    ] .
+
+eko:WorkingDocumentNotIndexedShape
+    a sh:NodeShape ;
+    sh:targetClass eko:WorkingDocument ;
+    rdfs:label "Working documents are not retrieval sources"@en ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "A working document is marked eligible for the retrieval index. This is the mechanism by which a draft becomes an organisation's answer."@en ;
+        sh:prefixes eko:prefixes ;
+        sh:select """
+            SELECT $this WHERE {
+                $this eko:retrievalProfile ?p .
+                ?p eko:indexEligible true .
+            }
+        """ ;
+    ] .
+
+################################################################################
+# LAYER 2c — The federated model has named humans in it
+################################################################################
+
+eko:DomainShape
+    a sh:NodeShape ;
+    sh:targetClass eko:Domain ;
+    rdfs:label "Every domain has a named expert and a named maintainer"@en ;
+
+    sh:property [
+        sh:path eko:domainExpert ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "Domain has no named expert. A federated model with unnamed nodes is a central model with a longer backlog."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:domainMaintainer ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "Domain has no named maintainer."@en ;
+    ] .
+
+eko:RetentionRuleShape
+    a sh:NodeShape ;
+    sh:targetClass eko:RetentionRule ;
+    rdfs:label "Retention periods cite their basis"@en ;
+
+    sh:property [
+        sh:path eko:retentionBasis ;
+        sh:minCount 1 ; sh:minLength 8 ;
+        sh:severity sh:Violation ;
+        sh:message "Cite the instrument and provision the retention period rests on. A period with no cited basis is a guess with a number attached, and it will not survive contact with a regulator or a subject access request."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:retentionPeriod ;
+        sh:minCount 1 ;
+        sh:datatype xsd:duration ;
+        sh:severity sh:Violation ;
+        sh:message "State the retention period as a duration."@en ;
+    ] ;
+    sh:property [
+        sh:path eko:retentionJurisdiction ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "State the jurisdiction. A group operating in several markets holds the same content under several different obligations, and the shortest one does not automatically win."@en ;
+    ] .

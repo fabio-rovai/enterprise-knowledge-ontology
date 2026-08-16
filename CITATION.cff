@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "Enterprise Knowledge Ontology (EKO) and the Corpus Readiness Index"
+message: "If you use this ontology, the publish gate or the Corpus Readiness Index, please cite it."
+type: software
+authors:
+  - given-names: Fabio
+    family-names: Rovai
+    affiliation: "Kampakis and Co Ltd t/a The Tesseract Academy"
+    email: fabio@thetesseractacademy.com
+repository-code: "https://github.com/fabio-rovai/enterprise-knowledge-ontology"
+abstract: >-
+  An OWL vocabulary formalising the distinction between working documents and
+  authoritative knowledge assets via the notion of a maintenance commitment, a
+  SHACL publish gate enforcing it, and a seven-dimension measurement instrument
+  for organisational knowledge corpora, validated against 54,222 documents of
+  the GOV.UK guidance estate.
+keywords:
+  - knowledge management
+  - knowledge architecture
+  - ontology
+  - SHACL
+  - retrieval-augmented generation
+  - information governance
+  - records management
+license: CC-BY-4.0
+version: 0.1.0
+date-released: 2026-08-16

@@ -1,0 +1,953 @@
+{
+  "corpus": "govuk_guidance.jsonl",
+  "documents": 54222,
+  "scanned_at": "2026-08-16T16:34:26.824418+00:00",
+  "D1_commitment_coverage": {
+    "score": 91.1,
+    "documents_with_no_owning_organisation": 4,
+    "documents_owned_only_by_non_live_organisations": 4810,
+    "documents_owned_by_an_organisation_that_no_longer_exists": 127,
+    "documents_with_machine_readable_review_cadence": 0,
+    "documents_with_machine_readable_verification_date": 0,
+    "note": "Ownership here means an organisation is named, which is a weak proxy: no named individual, no cadence and no verification date is expressed anywhere in the public metadata."
+  },
+  "_orphan_examples": [
+    {
+      "title": "Agreement regarding the status of forces of parties to the North Atlantic Treaty",
+      "url": "/government/publications/agreement-regarding-the-status-of-forces-of-parties-to-the-north-atlantic-treaty",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1955-01-01"
+    },
+    {
+      "title": "Robustness and provision against accidental actions",
+      "url": "/government/publications/robustness-and-provision-against-accidental-actions",
+      "owners": [
+        "Ministry of Housing, Communities & Local Government (2018 to 2021)"
+      ],
+      "updated": "1991-02-03"
+    },
+    {
+      "title": "Diagnostic radiology: national protocol for patient dose measurements",
+      "url": "/government/publications/diagnostic-radiology-national-protocol-for-patient-dose-measurements",
+      "owners": [
+        "Public Health England"
+      ],
+      "updated": "1992-11-14"
+    },
+    {
+      "title": "Agreement on the conservation of small cetaceans of the Baltic and North Sea: Misc No. 2 (1993)",
+      "url": "/government/publications/agreement-on-the-conservation-of-small-cetaceans-of-the-baltic-and-north-sea-misc-no-2-1993",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-01-08"
+    },
+    {
+      "title": "The Building Regulations 1991: caravans and mobile homes",
+      "url": "/government/publications/the-building-regulations-1991-caravans-and-mobile-homes",
+      "owners": [
+        "Ministry of Housing, Communities & Local Government (2018 to 2021)"
+      ],
+      "updated": "1993-01-13"
+    },
+    {
+      "title": "Agreement between the UK and the Czech and Slovak Federal Republic for the promotion and protection of investments",
+      "url": "/government/publications/agreement-between-the-uk-and-the-czech-and-slovak-federal-republic-for-the-promotion-and-protection-of-investments",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-07-28"
+    },
+    {
+      "title": "Agreement between the UK and Argentina for the promotion and protection of investments",
+      "url": "/government/publications/agreement-between-the-uk-and-argentina-for-the-promotion-and-protection-of-investments",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-07-28"
+    },
+    {
+      "title": "Protocol supplementary to the Agreement between the UK and Ireland: delimitation of the continental shelf",
+      "url": "/government/publications/protocol-supplementary-to-the-agreement-between-the-uk-and-ireland-delimitation-of-the-continental-shelf",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-08-25"
+    },
+    {
+      "title": "Europe Agreement establishing an association between the European Communities and Romania: Cm 2292",
+      "url": "/government/publications/europe-agreement-establishing-an-association-between-the-european-communities-and-romania-cm-2292",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-08-27"
+    },
+    {
+      "title": "Treaty on conventional armed forces in Europe",
+      "url": "/government/publications/treaty-on-conventional-armed-forces-in-europe",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-09-24"
+    },
+    {
+      "title": "Agreement between the UK and Barbados for the promotion and protection of investments",
+      "url": "/government/publications/agreement-between-the-uk-and-barbados-for-the-promotion-and-protection-of-investments",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-09-29"
+    },
+    {
+      "title": "Agreement establishing an association between the European Communities and Bulgaria: Cm 2336",
+      "url": "/government/publications/agreement-establishing-an-association-between-the-european-communities-and-bulgaria-cm-2336",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-10-15"
+    },
+    {
+      "title": "Protocol between the UK and France concerning frontier controls and policing",
+      "url": "/government/publications/protocol-between-the-uk-and-france-concerning-frontier-controls-and-policing",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-11-05"
+    },
+    {
+      "title": "Agreement between the UK and Ireland relating to the transmission of natural gas",
+      "url": "/government/publications/agreement-between-the-uk-and-ireland-relating-to-the-transmission-of-natural-gas",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1993-11-10"
+    },
+    {
+      "title": "Europe agreement establishing an association between the European Communities and the Slovak Republic",
+      "url": "/government/publications/europe-agreement-establishing-an-association-between-the-european-communities-and-the-slovak-republic",
+      "owners": [
+        "Foreign & Commonwealth Office"
+      ],
+      "updated": "1994-01-12"
+    }
+  ],
+  "D2_freshness": {
+    "score": 36.5,
+    "documents_with_a_date": 54222,
+    "age_buckets": {
+      "under_1y": 12728,
+      "1_to_2y": 7050,
+      "5_to_10y": 12499,
+      "2_to_5y": 11498,
+      "over_10y": 10447
+    },
+    "median_age_years": 3.69,
+    "mean_age_years": 5.28,
+    "oldest_age_years": 81.08,
+    "unchanged_over_2y": 34444,
+    "unchanged_over_5y": 22946,
+    "unchanged_over_10y": 10447,
+    "note": "This measures time since last change, not time since last verification. The two are routinely conflated and are not the same: a typo fix resets the first without touching the second. No source in this study publishes the second."
+  },
+  "D2b_publishing_era": {
+    "documents_with_an_era_marker": 50514,
+    "distribution": {
+      "2010 to 2015 Conservative and Liberal Democrat coalition government": 13595,
+      "2019 to 2022 Johnson Conservative government": 9632,
+      "2024 to 2026 Starmer Labour government": 7946,
+      "2016 to 2019 May Conservative government": 7591,
+      "2022 to 2024 Sunak Conservative government": 5535,
+      "2015 to 2016 Cameron Conservative government": 3219,
+      "2007 to 2010 Brown Labour government": 1212,
+      "1997 to 2007 Blair Labour government": 865,
+      "2026 Burnham Labour government": 481,
+      "2022 Truss Conservative government": 337,
+      "1990 to 1997 Major Conservative government": 61,
+      "1979 to 1990 Thatcher Conservative government": 17,
+      "1940 to 1945 Churchill national government": 12,
+      "1974 to 1976 Wilson Labour government": 5,
+      "1976 to 1979 Callaghan Labour government ": 2
+    }
+  },
+  "D3_canonicity": {
+    "score": 98.2,
+    "distinct_normalised_titles": 51780,
+    "titles_with_more_than_one_live_document": 935,
+    "documents_in_a_contested_title_group": 2941,
+    "contested_groups_under_a_single_owner": 799,
+    "largest_groups": [
+      {
+        "title": "tri service pension codes april",
+        "documents": 17,
+        "urls": [
+          "/government/publications/tri-service-pension-codes-april-2025",
+          "/government/publications/tri-service-pension-codes-april-2026",
+          "/government/publications/tri-service-pension-codes-april-2022",
+          "/government/publications/tri-service-pension-codes-april-2020",
+          "/government/publications/tri-service-pension-codes-april-2015",
+          "/government/publications/tri-service-pension-codes-april-2021"
+        ]
+      },
+      {
+        "title": "housing benefit adjudication circulars",
+        "documents": 16,
+        "urls": [
+          "/government/publications/housing-benefit-adjudication-circulars-2026",
+          "/government/publications/housing-benefit-adjudication-circulars-2025",
+          "/government/publications/housing-benefit-adjudication-circulars-2024",
+          "/government/publications/housing-benefit-adjudication-circulars-2021",
+          "/government/publications/housing-benefit-adjudication-circulars-2022",
+          "/government/publications/housing-benefit-adjudication-circulars-2016"
+        ]
+      },
+      {
+        "title": "housing benefit subsidy circulars",
+        "documents": 16,
+        "urls": [
+          "/government/publications/housing-benefit-subsidy-circulars-2026",
+          "/government/publications/housing-benefit-subsidy-circulars-2025",
+          "/government/publications/housing-benefit-subsidy-circulars-2024",
+          "/government/publications/housing-benefit-subsidy-circulars-2023",
+          "/government/publications/housing-benefit-subsidy-circulars-2011",
+          "/government/publications/housing-benefit-subsidy-circulars-2022"
+        ]
+      },
+      {
+        "title": "mca enforcement unit prosecutions",
+        "documents": 15,
+        "urls": [
+          "/government/publications/mca-enforcement-unit-prosecutions-2024",
+          "/government/publications/mca-enforcement-unit-prosecutions-2019",
+          "/government/publications/mca-enforcement-unit-prosecutions-2021",
+          "/government/publications/mca-enforcement-unit-prosecutions-2023",
+          "/government/publications/mca-enforcement-unit-prosecutions-2022",
+          "/government/publications/mca-enforcement-unit-prosecutions-2020"
+        ]
+      },
+      {
+        "title": "consolidated budgeting guidance to",
+        "documents": 14,
+        "urls": [
+          "/government/publications/consolidated-budgeting-guidance-2026-to-2027",
+          "/government/publications/consolidated-budgeting-guidance-2025-to-2026",
+          "/government/publications/consolidated-budgeting-guidance-2024-to-2025",
+          "/government/publications/consolidated-budgeting-guidance-2022-to-2023",
+          "/government/publications/consolidated-budgeting-guidance-2019-to-2020",
+          "/government/publications/consolidated-budgeting-guidance-2020-to-2021"
+        ]
+      },
+      {
+        "title": "country and regional analysis guidance",
+        "documents": 14,
+        "urls": [
+          "/government/publications/country-and-regional-analysis-2026-guidance",
+          "/government/publications/country-and-regional-analysis-2025-guidance",
+          "/government/publications/country-and-regional-analysis-2024-guidance",
+          "/government/publications/country-and-regional-analysis-guidance-2014",
+          "/government/publications/country-and-regional-analysis-guidance-2016",
+          "/government/publications/country-and-regional-analysis-guidance-2020"
+        ]
+      },
+      {
+        "title": "safety alerts",
+        "documents": 14,
+        "urls": [
+          "/government/publications/safety-alerts-2021",
+          "/government/publications/safety-alerts-2022",
+          "/government/publications/safety-alerts-2023",
+          "/government/publications/safety-alerts-2019",
+          "/government/publications/safety-alerts-2020",
+          "/government/publications/safety-alerts-2017"
+        ]
+      },
+      {
+        "title": "english housing survey to questionnaire and physical survey form",
+        "documents": 14,
+        "urls": [
+          "/government/publications/english-housing-survey-2024-to-2025-questionnaire-and-physical-survey-form",
+          "/government/publications/english-housing-survey-2021-to-2022-questionnaire-and-physical-survey-form",
+          "/government/publications/english-housing-survey-2022-to-2023-questionnaire-and-physical-survey-form",
+          "/government/publications/english-housing-survey-2023-to-2024-questionnaire-and-physical-survey-form",
+          "/government/publications/english-housing-survey-2020-to-2021-questionnaire-and-physical-survey-form",
+          "/government/publications/english-housing-survey-2015-to-2016-questionnaire-and-physical-survey-form"
+        ]
+      },
+      {
+        "title": "preston guidance june",
+        "documents": 13,
+        "urls": [
+          "/government/publications/preston-guidance-june-2026",
+          "/government/publications/preston-guidance-june-2025",
+          "/government/publications/preston-guidance-june-2019",
+          "/government/publications/preston-guidance-june-2015",
+          "/government/publications/preston-guidance-june-2018",
+          "/government/publications/preston-guidance-june-2020"
+        ]
+      },
+      {
+        "title": "preston guidance october",
+        "documents": 13,
+        "urls": [
+          "/government/publications/preston-guidance-october-2024",
+          "/government/publications/preston-guidance-october-2025",
+          "/government/publications/preston-guidance-october-2023",
+          "/government/publications/preston-guidance-october-2014",
+          "/government/publications/preston-guidance-october-2018",
+          "/government/publications/preston-guidance-october-2019"
+        ]
+      },
+      {
+        "title": "preston guidance november",
+        "documents": 13,
+        "urls": [
+          "/government/publications/preston-guidance-november-2024",
+          "/government/publications/preston-guidance-november-2025",
+          "/government/publications/preston-guidance-november-2014",
+          "/government/publications/preston-guidance-november-2022",
+          "/government/publications/preston-guidance-november-2023",
+          "/government/publications/preston-guidance-november-2013"
+        ]
+      },
+      {
+        "title": "public health commissioning in the nhs to",
+        "documents": 13,
+        "urls": [
+          "/government/publications/public-health-commissioning-in-the-nhs-2026-to-2027",
+          "/government/publications/public-health-commissioning-in-the-nhs-2015-to-2016",
+          "/government/publications/public-health-commissioning-in-the-nhs-2025-to-2026",
+          "/government/publications/public-health-commissioning-in-the-nhs-2018-to-2019",
+          "/government/publications/public-health-commissioning-in-the-nhs-2021-to-2022",
+          "/government/publications/public-health-commissioning-in-the-nhs-from-2013"
+        ]
+      },
+      {
+        "title": "english housing survey to technical report",
+        "documents": 13,
+        "urls": [
+          "/government/publications/english-housing-survey-2024-to-2025-technical-report",
+          "/government/publications/english-housing-survey-2023-to-2024-technical-report",
+          "/government/publications/english-housing-survey-2022-to-2023-technical-report",
+          "/government/publications/english-housing-survey-2021-to-2022-technical-report",
+          "/government/publications/english-housing-survey-2020-to-2021-technical-report",
+          "/government/publications/english-housing-survey-2014-to-2015-technical-report"
+        ]
+      },
+      {
+        "title": "notice of authorised amendments naa documents",
+        "documents": 13,
+        "urls": [
+          "/government/publications/notice-of-authorised-amendments-naa-2026-documents",
+          "/government/publications/notice-of-authorised-amendments-naa-2015-documents",
+          "/government/publications/notice-of-authorised-amendments-naa-2017-documents",
+          "/government/publications/notice-of-authorised-amendments-naa-2018-documents",
+          "/government/publications/notice-of-authorised-amendments-naa-2016-documents",
+          "/government/publications/notice-of-authorised-amendments-naa-2023-documents"
+        ]
+      },
+      {
+        "title": "local housing allowance lha rates applicable from april to march",
+        "documents": 12,
+        "urls": [
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2026-to-march-2027",
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2025-to-march-2026",
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2024-to-march-2025",
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2023-to-march-2024",
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2022-to-march-2023",
+          "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2021-to-march-2022"
+        ]
+      }
+    ]
+  },
+  "D4_decommission_hygiene": {
+    "withdrawn_documents_in_the_curated_search_index": 0,
+    "curated_index_share_percent": 0.0,
+    "score": 93.6,
+    "measured_against": "crawlable surface (publisher sitemap)",
+    "sitemap_urls_advertised": 864397,
+    "search_index_documents": 708433,
+    "sampled_urls": 499,
+    "withdrawn_in_sample": 32,
+    "withdrawn_rate_percent": 6.41,
+    "withdrawn_still_serving_body_text": 25,
+    "median_years_since_withdrawal": 5.87,
+    "oldest_withdrawal_years": 12.35,
+    "note": "The publisher's own search index excludes withdrawn content entirely, which is better discipline than most estates manage. The withdrawn pages nonetheless remain live at their original addresses, listed in the public sitemap, and fully served with body text by the content API. A pipeline built the obvious way, by crawling the sitemap, ingests exactly what the curated index was careful to exclude."
+  },
+  "D5_redundancy": {
+    "score": 96.9,
+    "documents_compared": 40289,
+    "near_duplicate_pairs": 11810,
+    "near_duplicate_clusters": 334,
+    "redundant_documents": 1245,
+    "method": "64-bit simhash over 3-word shingles, 4x16-bit banding, Hamming distance <= 3",
+    "largest_clusters": [
+      {
+        "size": 109,
+        "titles": [
+          "Preston guidance: April 2014",
+          "Preston guidance: April 2016",
+          "Preston guidance: April 2017",
+          "Preston Guidance: April 2018",
+          "Preston guidance: April 2019"
+        ],
+        "urls": [
+          "/government/publications/preston-guidance-april-2014",
+          "/government/publications/preston-guidance-april-2016",
+          "/government/publications/preston-guidance-april-2017",
+          "/government/publications/preston-guidance-april-2018",
+          "/government/publications/preston-guidance-april-2019"
+        ]
+      },
+      {
+        "size": 73,
+        "titles": [
+          "West Hertfordshire: bowel cancer screening programme",
+          "Peterborough and Hinchingbrooke: bowel cancer screening",
+          "East and North Hertfordshire: cervical screening programme",
+          "Lincolnshire: bowel cancer screening programme",
+          "Ipswich Hospital NHS Trust: cervical screening programme"
+        ],
+        "urls": [
+          "/government/publications/west-hertfordshire-bowel-cancer-screening-programme",
+          "/government/publications/peterborough-and-hinchingbrooke-bowel-cancer-screening",
+          "/government/publications/east-and-north-hertfordshire-cervical-screening-programme",
+          "/government/publications/lincolnshire-bowel-cancer-screening-programme",
+          "/government/publications/ipswich-hospital-nhs-trust-cervical-screening-programme"
+        ]
+      },
+      {
+        "size": 59,
+        "titles": [
+          "Part 1 Claim: A27 Shopwyke Lakes Northern Junction",
+          "Part 1 Claim: M4 J3 TO 12 Phase 2 - Junctions 3 to 8/9 Scheme",
+          "Part 1 Claim: M25 J10/A3 Wisley Interchange Improvement Scheme",
+          "Part 1 Claim: A46 Ashchurch Garden Centre S278 scheme",
+          "Part 1 Claim: A19 Downhill Lane scheme"
+        ],
+        "urls": [
+          "/government/publications/part-1-claim-a27-shopwyke-lakes-northern-junction",
+          "/government/publications/part-1-claim-m4-j3-to-12-phase-2-junctions-3-to-89-scheme",
+          "/government/publications/part-1-claim-m25-j10a3-wisley-interchange-improvement-scheme",
+          "/government/publications/part-1-claim-a46-ashchurch-garden-centre-s278-scheme",
+          "/government/publications/part-1-claim-a19-downhill-lane-scheme"
+        ]
+      },
+      {
+        "size": 50,
+        "titles": [
+          "Statement of position on non-court dispute resolution: Form FM5",
+          "Financial statement for a financial remedy in the family court or High Court: Form E1",
+          "Writ of control: Form No.53",
+          "Statement of service: Form C9",
+          "Notice of application to consider the financial position of the respondent after a divorce or dissolution: Form B"
+        ],
+        "urls": [
+          "/government/publications/statement-of-position-on-non-court-dispute-resolution-form-fm5",
+          "/government/publications/give-a-financial-statement-divorce-form-e1",
+          "/government/publications/form-no53-writ-of-control",
+          "/government/publications/statement-of-service-form-c9",
+          "/government/publications/form-b-notice-of-application-to-consider-the-financial-position-of-the-respondent-after-divorce-dissolution"
+        ]
+      },
+      {
+        "size": 38,
+        "titles": [
+          "Appeal an immigration or asylum decision: Form IAFT-1",
+          "Make an application: IAFT-4",
+          "Respond to a divorce, dissolution or judicial separation application: Form D10",
+          "Make an additional claim under CPR Part 20: Form N211",
+          "Tell us what you need at your hearing: IAFT-3"
+        ],
+        "urls": [
+          "/government/publications/appeal-an-immigration-or-asylum-decision-form-iaft-1",
+          "/government/publications/make-an-application-iaft-4",
+          "/government/publications/respond-to-a-divorce-dissolution-or-judicial-separation-application-form-d10",
+          "/government/publications/form-n211-claim-form-additional-claims-cpr-part-20",
+          "/government/publications/tell-us-what-you-need-at-your-hearing-iaft-3"
+        ]
+      },
+      {
+        "size": 34,
+        "titles": [
+          "Correction to the designs register under section 21: 80727240001000",
+          "Correction to the designs register under section 21: 80948120001000",
+          "Correction to the designs register under section 21: 80974010001000",
+          "Correction to the designs register under section 21: 80788210002000",
+          "Correction to the designs register under section 21: numbers starting 80752960"
+        ],
+        "urls": [
+          "/government/publications/correction-to-the-designs-register-under-section-21-80727240001000",
+          "/government/publications/correction-to-the-designs-register-under-section-21-80948120001000",
+          "/government/publications/correction-to-the-designs-register-under-section-21-80974010001000",
+          "/government/publications/correction-to-the-designs-register-under-section-21-80788210002000",
+          "/government/publications/correction-to-the-designs-register-under-section-21-numbers-starting-80752960"
+        ]
+      },
+      {
+        "size": 29,
+        "titles": [
+          "Preston guidance: June 2026",
+          "Preston guidance: March 2026",
+          "Preston guidance: April 2026",
+          "Preston guidance: February 2026",
+          "Preston guidance: July 2025"
+        ],
+        "urls": [
+          "/government/publications/preston-guidance-june-2026",
+          "/government/publications/preston-guidance-march-2026",
+          "/government/publications/preston-guidance-april-2026",
+          "/government/publications/preston-guidance-february-2026",
+          "/government/publications/preston-guidance-july-2025"
+        ]
+      },
+      {
+        "size": 28,
+        "titles": [
+          "Buckinghamshire Healthcare NHS Trust: cervical screening programme",
+          "Yeovil District Hospital NHS Foundation Trust: cervical screening",
+          "Taunton and Somerset NHS Foundation Trust: cervical screening",
+          "West Suffolk NHS Foundation Trust: cervical screening programme",
+          "Central Manchester NHS Trust: cervical screening programme"
+        ],
+        "urls": [
+          "/government/publications/buckinghamshire-healthcare-nhs-trust-cervical-screening-programme",
+          "/government/publications/yeovil-district-hospital-nhs-foundation-trust-cervical-screening-programme",
+          "/government/publications/taunton-and-somerset-nhs-foundation-trust-cervical-screening-programmme",
+          "/government/publications/west-suffolk-nhs-foundation-trust-cervical-screening-programme",
+          "/government/publications/central-manchester-nhs-trust-cervical-screening-programme"
+        ]
+      },
+      {
+        "size": 28,
+        "titles": [
+          "VO 6057 request for rental information: ferry terminals",
+          "VO 6035 request for rental information: stately homes",
+          "VO 6056 request for rental information: electricity generators (receipts and expenditure)",
+          "VO 6066 request for rental information: turnover rents",
+          "VO 6065 request for rental information: building costs"
+        ],
+        "urls": [
+          "/government/publications/vo-6057-request-for-rental-information-ferry-terminals",
+          "/government/publications/request-for-rental-information-stately-homes",
+          "/government/publications/request-for-rental-information-electricity-generatorsreceipts-expenditure",
+          "/government/publications/vo-6066-request-for-rental-information-turnover-rents",
+          "/government/publications/request-for-rental-information-building-costs"
+        ]
+      },
+      {
+        "size": 27,
+        "titles": [
+          "Torbay and South Devon: antenatal and newborn screening programme",
+          "Plymouth NHS Trust: antenatal and newborn screening programmes",
+          "Leicester, Leicestershire and Rutland: diabetic eye screening",
+          "Bolton Breast Screening Service: breast screening programme",
+          "Weston Area Health NHS Trust: antenatal and newborn screening"
+        ],
+        "urls": [
+          "/government/publications/torbay-and-south-devon-antenatal-and-newborn-screening-programme",
+          "/government/publications/plymouth-nhs-trust-antenatal-and-newborn-screening-programmes",
+          "/government/publications/leicester-leicestershire-and-rutland-diabetic-eye-screening",
+          "/government/publications/bolton-breast-screening-service-breast-screening-programme",
+          "/government/publications/weston-area-health-nhs-trust-antenatal-and-newborn-screening-programmes"
+        ]
+      },
+      {
+        "size": 23,
+        "titles": [
+          "Regulatory Article (RA) 3515: permanent fixed wing aerodrome: lighting",
+          "Regulatory Article (RA) 3511: permanent fixed wing aerodrome: physical characteristic",
+          "Regulatory Article (RA) 3500: aerodrome design and safeguarding",
+          "Regulatory Article (RA) 3590: maintenance and safeguarding",
+          "Regulatory Article (RA) 3512: permanent fixed wing aerodrome: obstacle environment"
+        ],
+        "urls": [
+          "/government/publications/regulatory-article-ra-3515-permanent-fixed-wing-aerodrome-lighting",
+          "/government/publications/regulatory-article-ra-3511-permanent-fixed-wing-aerodrome-physical-characteristic",
+          "/government/publications/regulatory-article-ra-3500-aerodrome-design-and-safeguarding",
+          "/government/publications/regulatory-article-ra-3590-maintenance-and-safeguarding",
+          "/government/publications/regulatory-article-ra-3512-permanent-fixed-wing-aerodrome-obstacle-environment"
+        ]
+      },
+      {
+        "size": 19,
+        "titles": [
+          "Rule 14.4 proof of debt (general form)",
+          "Rule 20.4 debtor application for an Order for non-disclosure of current address",
+          "Rule 22.4 notice to creditors \u2013 s216 re-use of a prohibited name",
+          "Rule 7.41 Statement of Affairs (company winding-up)",
+          "Rule 15.18 request by creditors for a decision (company winding-up)"
+        ],
+        "urls": [
+          "/government/publications/rule-144-proof-of-debt-general-form",
+          "/government/publications/rule-204-debtor-application-for-an-order-for-non-disclosure-of-current-address",
+          "/government/publications/rule-224-notice-to-creditors-s216-re-use-of-a-prohibited-name",
+          "/government/publications/rule-741-statement-of-affairs-company-winding-up",
+          "/government/publications/rule-1518-request-by-creditors-for-a-decision-company-winding-up"
+        ]
+      }
+    ]
+  },
+  "D6_coherence": {
+    "score": 94.0,
+    "topics_examined": 935,
+    "contradiction_candidate_pairs": 181,
+    "topics_with_at_least_one_candidate": 56,
+    "method": "Documents sharing a normalised title are compared on deterministically extracted monetary and percentage values. Disjoint value sets on the same topic are flagged as candidates for human adjudication, never as confirmed contradictions.",
+    "examples": [
+      {
+        "topic": "local housing allowance lha rates applicable from april to march",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2019-to-march-2020",
+          "values": [
+            3.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2015-march-2016",
+          "values": [
+            1.0,
+            4.0
+          ]
+        }
+      },
+      {
+        "topic": "local housing allowance lha rates applicable from april to march",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2017-march-2018",
+          "values": [
+            3.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2015-march-2016",
+          "values": [
+            1.0,
+            4.0
+          ]
+        }
+      },
+      {
+        "topic": "local housing allowance lha rates applicable from april to march",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2018-to-march-2019",
+          "values": [
+            3.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2015-march-2016",
+          "values": [
+            1.0,
+            4.0
+          ]
+        }
+      },
+      {
+        "topic": "local housing allowance lha rates applicable from april to march",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2014-to-march-2015",
+          "values": [
+            3.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/local-housing-allowance-lha-rates-applicable-from-april-2015-march-2016",
+          "values": [
+            1.0,
+            4.0
+          ]
+        }
+      },
+      {
+        "topic": "civil service pay remit guidance to",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2026-to-2027",
+          "values": [
+            3.5
+          ]
+        },
+        "b": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2025-to-2026",
+          "values": [
+            0.5,
+            3.25,
+            50.0
+          ]
+        }
+      },
+      {
+        "topic": "civil service pay remit guidance to",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2026-to-2027",
+          "values": [
+            3.5
+          ]
+        },
+        "b": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2024-to-2025",
+          "values": [
+            0.5,
+            5.0,
+            50.0
+          ]
+        }
+      },
+      {
+        "topic": "civil service pay remit guidance to",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2026-to-2027",
+          "values": [
+            3.5
+          ]
+        },
+        "b": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2023-to-2024",
+          "values": [
+            0.5,
+            4.5,
+            50.0
+          ]
+        }
+      },
+      {
+        "topic": "civil service pay remit guidance to",
+        "field": "pct",
+        "a": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2026-to-2027",
+          "values": [
+            3.5
+          ]
+        },
+        "b": {
+          "url": "/government/publications/civil-service-pay-remit-guidance-2022-to-2023",
+          "values": [
+            0.5,
+            1.0,
+            2.0,
+            3.0,
+            50.0
+          ]
+        }
+      },
+      {
+        "topic": "employer bulletin june",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/employer-bulletin-june-2026",
+          "values": [
+            20.0,
+            80.0,
+            100.0,
+            200.0,
+            300.0,
+            12570.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/employer-bulletin-june-2025",
+          "values": [
+            10000.0,
+            50270.0
+          ]
+        }
+      },
+      {
+        "topic": "employer bulletin june",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/employer-bulletin-june-2026",
+          "values": [
+            20.0,
+            80.0,
+            100.0,
+            200.0,
+            300.0,
+            12570.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/employer-bulletin-june-2023",
+          "values": [
+            1000.0,
+            3000.0,
+            100000.0,
+            150000.0
+          ]
+        }
+      },
+      {
+        "topic": "employer bulletin june",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/employer-bulletin-june-2025",
+          "values": [
+            10000.0,
+            50270.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/employer-bulletin-june-2023",
+          "values": [
+            1000.0,
+            3000.0,
+            100000.0,
+            150000.0
+          ]
+        }
+      },
+      {
+        "topic": "universal infant free school meals uifsm to",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/universal-infant-free-school-meals-uifsm-2026-to-2027",
+          "values": [
+            0.0,
+            2.66,
+            505.0,
+            1769.0,
+            7400.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/universal-infant-free-school-meals-uifsm-2025-to-2026",
+          "values": [
+            2.61,
+            495.9
+          ]
+        }
+      },
+      {
+        "topic": "higher tier capital grants",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/higher-tier-capital-grants-2026",
+          "values": [
+            50000.0,
+            500000.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/higher-tier-capital-grants-2025",
+          "values": [
+            10.27,
+            308.0
+          ]
+        }
+      },
+      {
+        "topic": "higher tier capital grants",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/higher-tier-capital-grants-2025",
+          "values": [
+            10.27,
+            308.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/higher-tier-capital-grants-2024",
+          "values": [
+            50000.0,
+            500000.0
+          ]
+        }
+      },
+      {
+        "topic": "land value estimates for policy appraisal",
+        "field": "money",
+        "a": {
+          "url": "/government/publications/land-value-estimates-for-policy-appraisal-2023",
+          "values": [
+            1000.0
+          ]
+        },
+        "b": {
+          "url": "/government/publications/land-value-estimates-for-policy-appraisal-2019",
+          "values": [
+            370000.0
+          ]
+        }
+      }
+    ]
+  },
+  "D7_retrieval_fitness": {
+    "score": 64.5,
+    "documents_with_no_description": 2,
+    "documents_absent_from_the_browse_taxonomy": 4086,
+    "documents_with_under_500_characters_of_indexable_text": 16131,
+    "median_body_characters": 2012,
+    "mean_body_characters": 11241,
+    "note": "A page with almost no indexable text is usually a wrapper around an attachment. The answer exists, but it is inside a document the retrieval layer sees as an opaque blob, which is the most common single reason an assistant cannot answer a question the organisation has demonstrably documented.",
+    "shortest_examples": [
+      {
+        "title": "SFO Deferred Prosecution Agreement with Airbus",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-airbus",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Rolls-Royce",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-rolls-royce",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Serco",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-serco",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Tesco",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-tesco",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Airline Services Limited",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-airline-services-limited",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with G4S",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-g4s",
+        "chars": 0
+      },
+      {
+        "title": "Brazil: note on marriage validity",
+        "url": "/government/publications/note-on-marriage-validity",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Amec Foster Wheeler",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-amec-foster-wheeler",
+        "chars": 0
+      },
+      {
+        "title": "SFO DPA with Bluu Solutions & Tetris Projects",
+        "url": "/government/publications/sfo-dpa-with-bluu-solutions-tetris-projects",
+        "chars": 0
+      },
+      {
+        "title": "SFO Deferred Prosecution Agreement with Standard Bank",
+        "url": "/government/publications/sfo-deferred-prosecution-agreement-with-standard-bank",
+        "chars": 0
+      }
+    ]
+  },
+  "CRI": 78.2,
+  "dimension_scores": {
+    "D1_commitment": 91.1,
+    "D2_freshness": 36.5,
+    "D3_canonicity": 98.2,
+    "D4_decommission": 93.6,
+    "D5_redundancy": 96.9,
+    "D6_coherence": 94.0,
+    "D7_retrieval": 64.5
+  }
+}

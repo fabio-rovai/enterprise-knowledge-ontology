@@ -1,0 +1,161 @@
+@prefix eko:  <https://gov.tesseract.academy/def/knowledge#> .
+@prefix ekos: <https://gov.tesseract.academy/def/knowledge/scheme#> .
+@prefix ex:   <https://example.org/knowledge/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+################################################################################
+# A worked example of a small knowledge estate, containing both content that
+# passes the publish gate and content that fails it in the four ways that
+# matter most in practice.
+#
+# Run:  python3 pipeline/validate.py
+################################################################################
+
+ex:alice a prov:Agent ; rdfs:label "Alice Nwosu, Head of Credit Products" .
+ex:bhavna a prov:Agent ; rdfs:label "Bhavna Rao, Product Manager" .
+ex:carlos a prov:Agent ; rdfs:label "Carlos Mendes, Regulatory Counsel" .
+
+ex:credit-products a eko:Domain ;
+    rdfs:label "Credit products" ;
+    eko:domainExpert ex:alice ;
+    eko:domainMaintainer ex:bhavna .
+
+# A domain nobody has been named for. The federated model's characteristic
+# failure: the box exists on the map, the names were never filled in.
+ex:market-intelligence a eko:Domain ;
+    rdfs:label "Market intelligence" .
+
+################################################################################
+# PASSES — a properly committed knowledge asset
+################################################################################
+
+ex:commitment-eligibility a eko:ActiveCommitment ;
+    eko:accountableOwner ex:alice ;
+    eko:namedMaintainer ex:bhavna ;
+    eko:reviewCadence "P3M"^^xsd:duration ;
+    eko:lastVerified "2026-07-02"^^xsd:date ;
+    eko:nextReviewDue "2026-10-02"^^xsd:date ;
+    eko:scopeStatement "Covers eligibility criteria for the UK card panel only. Does not cover loans, and does not cover the South Africa, Australia or Canada panels." ;
+    eko:commitmentState ekos:commitment-active .
+
+ex:eligibility-criteria a eko:KnowledgeAsset ;
+    rdfs:label "Card panel eligibility criteria (UK)" ;
+    eko:underCommitment ex:commitment-eligibility ;
+    eko:authorityLevel ekos:authoritative ;
+    eko:accessLabel ekos:internal ;
+    eko:assetType ekos:reference-data ;
+    eko:coversDomain ex:credit-products ;
+    eko:lifecycleState ekos:published ;
+    eko:retrievalProfile ex:rp-eligibility .
+
+ex:rp-eligibility a eko:RetrievalProfile ;
+    eko:indexEligible true ;
+    eko:permissionModel ekos:perm-inherit ;
+    eko:chunkingUnit ekos:chunk-table ;
+    eko:groundingPriority 1 ;
+    eko:freshnessHorizon "P6M"^^xsd:duration .
+
+ex:canon-eligibility a eko:CanonicalDesignation ;
+    eko:designatedAsset ex:eligibility-criteria ;
+    eko:designatedTopic ex:topic-eligibility ;
+    eko:designatedBy ex:alice ;
+    eko:designationFrom "2025-04-01"^^xsd:date .
+
+ex:topic-eligibility a eko:Topic ; rdfs:label "Which customers qualify for the card panel" .
+
+################################################################################
+# FAILS — a working document that has been made retrievable
+#
+# The single most consequential defect in a retrieval-backed estate. Somebody's
+# analysis deck, with no commitment attached, is in the index and will be served
+# as the organisation's answer.
+################################################################################
+
+ex:pricing-scratchpad a eko:WorkingDocument ;
+    rdfs:label "Pricing model v3 working notes" ;
+    eko:lifecycleState ekos:draft ;
+    eko:retrievalProfile ex:rp-scratchpad .
+
+ex:rp-scratchpad a eko:RetrievalProfile ;
+    eko:indexEligible true ;
+    eko:permissionModel ekos:perm-inherit .
+
+################################################################################
+# FAILS — an asset whose commitment has lapsed and which is overdue, but which
+# still presents itself as published
+################################################################################
+
+ex:commitment-affordability a eko:MaintenanceCommitment ;
+    eko:accountableOwner ex:carlos ;
+    eko:namedMaintainer ex:carlos ;
+    eko:reviewCadence "P1Y"^^xsd:duration ;
+    eko:lastVerified "2023-01-15"^^xsd:date ;
+    eko:nextReviewDue "2024-01-15"^^xsd:date ;
+    eko:scopeStatement "Affordability assessment approach across all four markets." ;
+    eko:commitmentState ekos:commitment-lapsed .
+
+ex:affordability-approach a eko:KnowledgeAsset ;
+    rdfs:label "Affordability assessment approach" ;
+    eko:underCommitment ex:commitment-affordability ;
+    eko:authorityLevel ekos:authoritative ;
+    eko:accessLabel ekos:internal ;
+    eko:assetType ekos:regulatory-interpretation ;
+    eko:coversDomain ex:credit-products ;
+    eko:lifecycleState ekos:published .
+
+################################################################################
+# FAILS — superseded content that names no successor, and a withdrawn asset
+# that still holds a live canonical designation
+################################################################################
+
+ex:old-fee-schedule a eko:KnowledgeAsset ;
+    rdfs:label "Fee schedule 2024" ;
+    eko:underCommitment ex:commitment-eligibility ;
+    eko:authorityLevel ekos:deprecated ;
+    eko:accessLabel ekos:internal ;
+    eko:assetType ekos:reference-data ;
+    eko:coversDomain ex:credit-products ;
+    eko:lifecycleState ekos:superseded .
+
+ex:withdrawn-market-note a eko:KnowledgeAsset ;
+    rdfs:label "Open banking market note (withdrawn)" ;
+    eko:underCommitment ex:commitment-eligibility ;
+    eko:authorityLevel ekos:deprecated ;
+    eko:accessLabel ekos:internal ;
+    eko:assetType ekos:market-analysis ;
+    eko:coversDomain ex:credit-products ;
+    eko:lifecycleState ekos:withdrawn .
+
+ex:canon-market-note a eko:CanonicalDesignation ;
+    eko:designatedAsset ex:withdrawn-market-note ;
+    eko:designatedTopic ex:topic-open-banking ;
+    eko:designatedBy ex:alice ;
+    eko:designationFrom "2024-06-01"^^xsd:date .
+
+ex:topic-open-banking a eko:Topic ; rdfs:label "Our position on open banking data sharing" .
+
+################################################################################
+# FAILS — a learning record that records the intention and never the outcome
+################################################################################
+
+ex:learning-panel-change a eko:LearningRecord ;
+    rdfs:label "Q1 panel expansion decision" ;
+    eko:underCommitment ex:commitment-eligibility ;
+    eko:authorityLevel ekos:endorsed ;
+    eko:accessLabel ekos:internal ;
+    eko:assetType ekos:decision-record ;
+    eko:coversDomain ex:credit-products ;
+    eko:lifecycleState ekos:published ;
+    eko:learningTrigger ekos:trigger-launch ;
+    eko:learningQuestion "Should we admit three additional lenders to the UK card panel in Q1?" ;
+    eko:decisionTaken "Admit two of the three, holding the third pending an affordability data review." .
+
+################################################################################
+# FAILS — a retention rule with a period and no cited basis
+################################################################################
+
+ex:retention-marketing a eko:RetentionRule ;
+    eko:retentionPeriod "P6Y"^^xsd:duration ;
+    eko:retentionJurisdiction "GB" .
