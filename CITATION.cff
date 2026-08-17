@@ -5,7 +5,7 @@ type: software
 authors:
   - given-names: Fabio
     family-names: Rovai
-    affiliation: "Kampakis and Co Ltd t/a The Tesseract Academy"
+    affiliation: "Kampakis and Co Ltd (The Tesseract Academy)"
     email: fabio@thetesseractacademy.com
 repository-code: "https://github.com/fabio-rovai/enterprise-knowledge-ontology"
 abstract: >-
@@ -15,13 +15,15 @@ abstract: >-
   for organisational knowledge corpora, validated against 54,222 documents of
   the GOV.UK guidance estate.
 keywords:
-  - knowledge management
-  - knowledge architecture
   - ontology
   - SHACL
+  - knowledge management
+  - knowledge architecture
+  - corpus readiness
   - retrieval-augmented generation
   - information governance
   - records management
+  - register assurance
 license: CC-BY-4.0
 version: 0.1.0
-date-released: 2026-08-16
+date-released: 2026-08-17

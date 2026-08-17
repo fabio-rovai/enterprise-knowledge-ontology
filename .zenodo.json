@@ -5,7 +5,7 @@
   "creators": [
     {
       "name": "Rovai, Fabio",
-      "affiliation": "The Tesseract Academy (Kampakis and Co Ltd)"
+      "affiliation": "Kampakis and Co Ltd (The Tesseract Academy)"
     }
   ],
   "license": "cc-by-4.0",
@@ -13,10 +13,12 @@
     "ontology",
     "SHACL",
     "knowledge management",
-    "enterprise knowledge",
+    "knowledge architecture",
     "corpus readiness",
-    "register assurance",
-    "identifier governance"
+    "retrieval-augmented generation",
+    "information governance",
+    "records management",
+    "register assurance"
   ],
   "related_identifiers": [
     {
